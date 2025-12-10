@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BistData - Anasayfa ve Detaylı Analiz</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="dark">
+
+
+    <div class="sol-sutun">
+        <div class="header-band">
+              <button class="tema-buton" id="temaDegistir" title="Tema Değiştir">☀️</button>
+               <div class="kullanici-alani">
+               <i class="fas fa-user-circle"></i>
+        </div>
+    </div>
+        <div class="logo-alani">
+    <img src="images/logoson.png" alt="BİSTDATAS Logo" class="bistdatas-logo">
+    
+</div>
+        
+        <form class="arama-kutusu" onsubmit="return false;">
+            <input type="text" placeholder="Ara..." required>
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+
+        <ul class="sol-menü">
+            <li><a href="#" class="aktif-sol-menü" data-sekme-target="anasayfa-icerik"><i class="fas fa-home"></i> Anasayfa</a></li>
+            <li><a href="#" data-sekme-target="hisseler-icerik"><i class="fas fa-chart-line"></i> Hisseler</a></li>
+            <li><a href="#" data-sekme-target="izleme-listesi-icerik"><i class="fas fa-bookmark"></i> İzleme Listesi</a></li>
+            <li><a href="#" data-sekme-target="portföy-icerik"><i class="fas fa-chart-pie"></i> Portföy</a></li>
+        </ul>
+        
+        <div class="alt-menü-kapsayici">
+            <h3 class="menu-baslik">Analiz</h3>
+            <ul class="alt-menü">
+                <li><a href="#" class="menu-link" data-sekme-target="hisse-detay-icerik" data-sekme-internal="ozet">Özet</a></li>
+                <li><a href="#" class="menu-link" data-sekme-target="hisse-detay-icerik" data-sekme-internal="bistdata-analiz">BistData Analiz</a></li>
+                <li><a href="#" class="menu-link" data-sekme-target="hisse-detay-icerik" data-sekme-internal="hisse-degerleme-icerik">Hisse Değerleme</a></li>
+                <li><span class="toggle-menu" data-target="mali-menu">Finansal Veriler</span>
+                    <ul id="mali-menu" class="sub-menu gizli"> <li><a href="#" data-sekme-target="hisse-detay-icerik" data-sekme-internal="bilanco">Bilanço</a></li>
+                        <li><a href="#" data-sekme-target="hisse-detay-icerik" data-sekme-internal="gelir-tablosu">Gelir Tablosu</a></li>
+                        <li><a href="#" data-sekme-target="hisse-detay-icerik" data-sekme-internal="nakit-akis">Nakit Akış</a></li>
+                    </ul>
+                </li>
+                </ul>
+        </div>
+        
+        
+        <div class="alt-menü-kapsayici">
+            <h3 class="menu-baslik">Hisse Detay</h3>
+            <ul class="alt-menü">
+                <li><a href="#" data-sekme-target="bildirimler-icerik">Bildirimler</a></li>
+                <li><a href="#" data-sekme-target="geri-alim-icerik">Geri Alım</a></li>
+                <li><a href="#" data-sekme-target="is-iliskisi-icerik">İş İlişkisi</a></li>
+                <li><a href="#" data-sekme-target="halka-arz-icerik">Halka Arz</a></li>
+                <li><a href="#" data-sekme-target="finansal-okur-icerik">Finansal Okur-</a></li>
+                <div class="sidebar-login-box">
+                     <button class="sidebar-login-btn">Giriş / Kayıt Ol</button>
+</div>
+            </ul>
+        </div>
+    </div>
+
+    <div class="ana-icerik-kapsayici">
+        <div class="ana-icerik">
+
+            <div class="reklam-alani ust">reklam alanı</div>
+            
+
+            <div id="anasayfa-icerik" class="content-box">
+                <div class="piyasa-verileri-band">
+                    <div class="piyasa-kutu">
+                        <span class="piyasa-baslik">BIST 30</span>
+                        <span class="piyasa-deger">10.252</span>
+                        <span class="piyasa-degisim artti">+0.89</span>
+                    </div>
+                    <div class="piyasa-kutu">
+                        <span class="piyasa-baslik">BIST 100</span>
+                        <span class="piyasa-deger">12.854</span>
+                        <span class="piyasa-degisim artti">+0.98</span>
+                    </div>
+                    <div class="piyasa-kutu">
+                        <span class="piyasa-baslik">DOLAR/TL</span>
+                        <span class="piyasa-deger">42,25</span>
+                        <span class="piyasa-degisim artti">+0.35</span>
+                    </div>
+                    <div class="piyasa-kutu">
+                        <span class="piyasa-baslik">EURO/TL</span>
+                        <span class="piyasa-deger">49,54</span>
+                        <span class="piyasa-degisim dustu">-0.45</span>
+                    </div>
+                    <div class="piyasa-kutu">
+                        <span class="piyasa-baslik">ONS ALTIN</span>
+                        <span class="piyasa-değer">3852.52</span>
+                        <span class="piyasa-degisim artti">+4.55</span>
+                    </div>
+                    <div class="piyasa-kutu">
+                        <span class="piyasa-baslik">GRAM ALTIN</span>
+                        <span class="piyasa-deger">5247</span>
+                        <span class="piyasa-degisim artti">+4.55</span>
+                    </div>
+                </div>
+
+                <div class="siralama-listeleri">
+                    <div class="siralama-kutu">
+                        <h4 class="siralama-baslik">En Çok Yükselenler</h4>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Asels</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim artti">+4,25</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Sasa</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim artti">+4,25</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Gesan</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim artti">+4,25</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Aksn</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim artti">+4,25</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Eregl</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim artti">+4,25</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Bvsan</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim artti">+4,25</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Odine</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim artti">+4,25</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Tcell</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim artti">+4,25</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Bimas</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim artti">+4,25</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Miatk</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim artti">+4,25</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Tehol</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim artti">+4,25</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Sdttr</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim artti">+4,25</span>
+                        </div>
+                    </div>
+
+                    <div class="siralama-kutu">
+                        <h4 class="siralama-baslik">En Çok Düşenler</h4>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Asels</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim dustu">-4,25</span>
+                        </div>
+                         <div class="liste-satir">
+                            <span class="hisse-kisa">Sasa</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim dustu">-4,25</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Gesan</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim dustu">-4,25</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Aksen</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim dustu">-4,25</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Eregl</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim dustu">-4,25</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Bvsan</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim dustu">-4,25</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Odine</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim dustu">-4,25</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Tcell</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim dustu">-4,25</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Bimas</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim dustu">-4,25</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Miatk</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim dustu">-4,25</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Tehol</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim dustu">-4,25</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Sdttr</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-degisim dustu">-4,25</span>
+                        </div>
+                    </div>
+                    
+                    <div class="siralama-kutu hacimler">
+                        <h4 class="siralama-baslik">En Hacimliler</h4>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Asels</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-hacim">1,950M TL</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Sasa</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-hacim">1,950M TL</span>
+                        </div>
+                         <div class="liste-satir">
+                            <span class="hisse-kisa">Gesan</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-hacim">1,950M TL</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Aksn</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-hacim">1,950M TL</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Eregl</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-hacim">1,950M TL</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Bvsan</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-hacim">1,950M TL</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Odine</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-hacim">1,950M TL</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Tcell</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-hacim">1,950M TL</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Bimas</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-hacim">1,950M TL</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Miatk</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-hacim">1,950M TL</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Tehol</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-hacim">1,950M TL</span>
+                        </div>
+                        <div class="liste-satir">
+                            <span class="hisse-kisa">Sdttr</span>
+                            <span class="hisse-fiyat">205,15</span>
+                            <span class="hisse-hacim">1,950M TL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kap-bildirimleri-band">
+                    <h3 class="kap-baslik">Kap Bildirimleri</h3>
+                    <div class="kap-icerik-kutu">
+                        <h3 class="kap-baslik">Kap Bildirimleri</h3>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="hisse-detay-icerik" class="content-box gizli">
+    
+    <div class="hisse-baslik-alan">
+        <div class="hisse-sol">
+            <h1 class="hisse-kodu">Asels</h1>
+            <span class="hisse-ad">ASELSAN Elektronik Sanayi Savunma</span>
+            <div class="fiyat-bilgi">
+                <span class="fiyat">207.25</span>
+                <span class="yuzde artti">+3.55</span>
+            </div>
+        </div>
+
+        <div class="tekli-panel-listesi">
+            <div class="ozet-bilgi-panel">
+                <div class="ozet-bilgi-baslik">Ödenmiş Sermaye</div>
+                <div class="ozet-bilgi-deger">1.000.000.000 TL</div> 
+            </div>
+            <div class="ozet-bilgi-panel">
+                <div class="ozet-bilgi-baslik">Piyasa Değeri</div>
+                <div class="ozet-bilgi-deger">50.000.000.000 TL</div> 
+            </div>
+            <div class="ozet-bilgi-panel">
+                <div class="ozet-bilgi-baslik">Halka Açıklık Oranı</div>
+                <div class="ozet-bilgi-deger">%40</div> 
+            </div>
+        </div>
+    </div>
+
+    <div class="sekme-menü">
+        <div class="sekme-baslik aktif" data-sekme="ozet">Özet</div>
+        <div class="sekme-baslik" data-sekme="bistdata-analiz">BistData Analizi</div>
+        <div class="sekme-baslik" data-sekme="finansal-veriler">Finansal Veriler</div>
+        <div class="sekme-baslik" data-sekme="bildirimler">Bildirimler</div>
+        <div class="sekme-baslik" data-sekme="geri-alim">Geri Alım</div>
+        <div class="sekme-baslik" data-sekme="is-iliskisi">İş İlişkisi</div>
+        <div class="sekme-baslik" data-sekme="hisse-degerleme">Hisse Değerleme</div>
+        <div class="sekme-baslik" data-sekme="sirket-karnesi">Şirket Karnesi</div>
+    </div>
+    
+    <div id="ozet-icerik" class="sekme-icerik">
+
+        <div class="panel-row-tek">
+            <div class="oranlar-panel">
+                <h3 class="panel-baslik">Çarpanlar</h3>
+                <div class="oranlar-tablosu">
+                    <div class="oran-satir"><span class="oran-ad">F/K</span><span class="oran-deger">11</span></div>
+                    <div class="oran-satir"><span class="oran-ad">PD/DD</span><span class="oran-deger">11</span></div>
+                    <div class="oran-satir"><span class="oran-ad">FD/FAVÖK</span><span class="oran-deger">11</span></div>
+                    <div class="oran-satir"><span class="oran-ad">NETBORÇ/FAVÖK</span><span class="oran-deger">11</span></div>
+                    <div class="oran-satir"><span class="oran-ad">PD/SATIŞLAR</span><span class="oran-deger">11</span></div>
+                    <div class="oran-satir"><span class="oran-ad">PD/EFK</span><span class="oran-deger">11</span></div>
+                    <div class="oran-satir"><span class="oran-ad">PD/FAVÖK</span><span class="oran-değer">11</span></div>
+                    <div class="oran-satir"><span class="oran-ad">P/O.NER.KAR</span><span class="oran-deger">11</span></div>
+                </div>
+            </div>
+            
+            <div class="oranlar-panel">
+                <h3 class="panel-baslik">Karlılık</h3>
+                <div class="oranlar-tablosu">
+                    <div class="oran-satir"><span class="oran-ad">Özsermaye Karlılığı</span><span class="oran-deger">11</span></div>
+                    <div class="oran-satir"><span class="oran-ad">Aktif Karlılık</span><span class="oran-deger">11</span></div>
+                    <div class="oran-satir"><span class="oran-ad">Brüt Kar Marjı</span><span class="oran-deger">11</span></div>
+                    <div class="oran-satir"><span class="oran-ad">Brüt Kar Marjı (Çeyrek)</span><span class="oran-deger">11</span></div>
+                    <div class="oran-satir"><span class="oran-ad">Favök Marjı</span><span class="oran-deger">11</span></div>
+                    <div class="oran-satir"><span class="oran-ad">Favök Marjı (ÇEYREK)</span><span class="oran-deger">11</span></div>
+                    <div class="oran-satir"><span class="oran-ad">Net Kar Marjı</span><span class="oran-değer">11</span></div>
+                    <div class="oran-satir"><span class="oran-ad">Net Kar</span><span class="oran-deger">11</span></div>
+                </div>
+            </div>
+
+            <div class="oranlar-panel">
+                <h3 class="panel-baslik">Oranlar</h3>
+                <div class="oranlar-tablosu">
+                    <div class="oran-satir"><span class="oran-ad">Cari Oran</span><span class="oran-deger">11</span></div>
+                    <div class="oran-satir"><span class="oran-ad">Likidite Oranı</span><span class="oran-deger">11</span></div>
+                    <div class="oran-satir"><span class="oran-ad">Nakit Oranı</span><span class="oran-deger">11</span></div>
+                    <div class="oran-satir"><span class="oran-ad">Borçluluk Oranı</span><span class="oran-deger">11</span></div>
+                    <div class="oran-satir"><span class="oran-ad">Kaldıraç Oranı</span><span class="oran-deger">11</span></div>
+                    <div class="oran-satir"><span class="oran-ad">Finansal Borç Oranı</span><span class="oran-deger">11</span></div>
+                </div>
+            </div>
+
+        </div>
+        
+        <div class="grafik-panel">
+            <h3 class="panel-baslik">Satışlar</h3>
+            <div class="grafik-yer-tutucu">
+                <div class="y-ekseni">
+                    <span>85.000</span>
+                    <span>70.000</span>
+                    <span>55.000</span>
+                    <span>40.000</span>
+                    <span>25.000</span>
+                    <span>10.000</span>
+                </div>
+                <div class="grafik-alani">
+                    <div class="grafik-cubuklari ">
+                        <div class="cubuk-konumlandirici" style="--yuzde: 15%; --deger: 4.345;"> <div class="deger-etiket">4.345</div> <div class="cubuk"></div> <div class="ay-etiket">2022-3</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 40%; --deger: 10.841;"> <div class="deger-etiket">10.841</div> <div class="cubuk"></div> <div class="ay-etiket">2022-6</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 55%; --deger: 17.728;"> <div class="deger-etiket">17.728</div> <div class="cubuk"></div> <div class="ay-etiket">2022-9</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 80%; --deger: 66.840;"> <div class="deger-etiket">66.840</div> <div class="cubuk"></div> <div class="ay-etiket">2022-12</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 35%; --deger: 14.401;"> <div class="deger-etiket">14.401</div> <div class="cubuk"></div> <div class="ay-etiket">2023-3</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 50%; --deger: 18.067;"> <div class="deger-etiket">18.067</div> <div class="cubuk"></div> <div class="ay-etiket">2023-6</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 65%; --deger: 32.067;"> <div class="değer-etiket">32.067</div> <div class="cubuk"></div> <div class="ay-etiket">2023-9</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 90%; --deger: 73.593;"> <div class="deger-etiket">73.593</div> <div class="cubuk"></div> <div class="ay-etiket">2023-12</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 45%; --deger: 15.139;"> <div class="deger-etiket">15.139</div> <div class="cubuk"></div> <div class="ay-etiket">2024-3</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 10%; --deger: 4.000;"> <div class="deger-etiket">ÖYOK</div> <div class="cubuk"></div> <div class="ay-etiket">2024-6</div> </div>
+                    </div>
+                    <div class="grafik-cizgisi"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grafik-panel">
+            <h3 class="panel-baslik">Favök</h3>
+            <div class="grafik-yer-tutucu">
+                <div class="y-ekseni">
+                    <span>85.000</span>
+                    <span>70.000</span>
+                    <span>55.000</span>
+                    <span>40.000</span>
+                    <span>25.000</span>
+                    <span>10.000</span>
+                </div>
+                <div class="grafik-alani">
+                    <div class="grafik-cubuklari">
+                        <div class="cubuk-konumlandirici" style="--yuzde: 15%; --deger: 4.345;"> <div class="deger-etiket">4.345</div> <div class="cubuk"></div> <div class="ay-etiket">2022-3</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 40%; --deger: 10.841;"> <div class="deger-etiket">10.841</div> <div class="cubuk"></div> <div class="ay-etiket">2022-6</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 55%; --deger: 17.728;"> <div class="deger-etiket">17.728</div> <div class="cubuk"></div> <div class="ay-etiket">2022-9</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 80%; --deger: 66.840;"> <div class="deger-etiket">66.840</div> <div class="cubuk"></div> <div class="ay-etiket">2022-12</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 35%; --deger: 14.401;"> <div class="deger-etiket">14.401</div> <div class="cubuk"></div> <div class="ay-etiket">2023-3</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 50%; --deger: 18.067;"> <div class="deger-etiket">18.067</div> <div class="cubuk"></div> <div class="ay-etiket">2023-6</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 65%; --deger: 32.067;"> <div class="deger-etiket">32.067</div> <div class="cubuk"></div> <div class="ay-etiket">2023-9</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 90%; --deger: 73.593;"> <div class="deger-etiket">73.593</div> <div class="cubuk"></div> <div class="ay-etiket">2023-12</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 45%; --deger: 15.139;"> <div class="deger-etiket">15.139</div> <div class="cubuk"></div> <div class="ay-etiket">2024-3</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 10%; --deger: 4.000;"> <div class="deger-etiket">ÖYOK</div> <div class="cubuk"></div> <div class="ay-etiket">2024-6</div> </div>
+                    </div>
+                    <div class="grafik-cizgisi"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grafik-panel">
+            <h3 class="panel-baslik">Net Kar</h3>
+            <div class="grafik-yer-tutucu">
+                <div class="y-ekseni">
+                    <span>85.000</span>
+                    <span>70.000</span>
+                    <span>55.000</span>
+                    <span>40.000</span>
+                    <span>25.000</span>
+                    <span>10.000</span>
+                </div>
+                <div class="grafik-alani">
+                    <div class="grafik-cubuklari">
+                        <div class="cubuk-konumlandirici" style="--yuzde: 15%; --deger: 4.345;"> <div class="deger-etiket">4.345</div> <div class="cubuk"></div> <div class="ay-etiket">2022-3</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 40%; --deger: 10.841;"> <div class="deger-etiket">10.841</div> <div class="cubuk"></div> <div class="ay-etiket">2022-6</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 55%; --deger: 17.728;"> <div class="deger-etiket">17.728</div> <div class="cubuk"></div> <div class="ay-etiket">2022-9</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 80%; --deger: 66.840;"> <div class="deger-etiket">66.840</div> <div class="cubuk"></div> <div class="ay-etiket">2022-12</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 35%; --deger: 14.401;"> <div class="deger-etiket">14.401</div> <div class="cubuk"></div> <div class="ay-etiket">2023-3</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 50%; --deger: 18.067;"> <div class="deger-etiket">18.067</div> <div class="cubuk"></div> <div class="ay-etiket">2023-6</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 65%; --deger: 32.067;"> <div class="deger-etiket">32.067</div> <div class="cubuk"></div> <div class="ay-etiket">2023-9</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 90%; --deger: 73.593;"> <div class="deger-etiket">73.593</div> <div class="cubuk"></div> <div class="ay-etiket">2023-12</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 45%; --deger: 15.139;"> <div class="deger-etiket">15.139</div> <div class="cubuk"></div> <div class="ay-etiket">2024-3</div> </div>
+                        <div class="cubuk-konumlandirici" style="--yuzde: 10%; --deger: 4.000;"> <div class="deger-etiket">ÖYOK</div> <div class="cubuk"></div> <div class="ay-etiket">2024-6</div> </div>
+                    </div>
+                    <div class="grafik-cizgisi"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="hisse-degerleme-icerik" class="sekme-icerik gizli">
+        <div class="financial-table-container">
+            <table class="financial-table" id="hisseTablosu">
+                <thead>
+                    <tr>
+                        <th></th> <th>2023/9</th>
+                        <th>2023/12</th>
+                        <th>2024/3</th>
+                        <th>2024/6</th>
+                        <th>2024/9</th>
+                        <th>2024/12</th>
+                        <th>2025/3</th>
+                        <th>2025/6</th>
+                        <th>2025/9</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="data-row">
+                        <td>HİSSE TL FİYATI</td>
+                        <td>133</td>
+                        <td>148</td>
+                        <td>221,4</td>
+                        <td>164</td>
+                        <td>151,8</td>
+                        <td>153,1</td>
+                        <td>129,3</td>
+                        <td>153</td>
+                        <td>197,5</td>
+                    </tr>
+                    <tr class="data-row bg-beige">
+                        <td>HİSSE SAYISI</td>
+                        <td>219.801.000</td>
+                        <td>219.801.000</td>
+                        <td>219.801.000</td>
+                        <td>219.801.000</td>
+                        <td>219.801.000</td>
+                        <td>219.801.000</td>
+                        <td>219.801.000</td>
+                        <td>219.801.000</td>
+                        <td>219.801.000</td>
+                    </tr>
+                    <tr class="data-row bg-beige">
+                        <td>PİYASA DEĞERİ</td>
+                        <td>29.233.533.000</td>
+                        <td>32.530.548.000</td>
+                        <td>48.663.941.400</td>
+                        <td>36.047.364.000</td>
+                        <td>33.365.791.800</td>
+                        <td>33.651.533.100</td>
+                        <td>28.420.269.300</td>
+                        <td>33.629.553.000</td>
+                        <td>43.410.697.500</td>
+                    </tr>
+                    <tr class="data-row bg-beige">
+                        <td>FİRMA DEĞERİ</td>
+                        <td>29.614.529.000</td>
+                        <td>32.052.619.000</td>
+                        <td>48.104.777.400</td>
+                        <td>35.844.528.000</td>
+                        <td>31.918.022.800</td>
+                        <td>32.421.594.100</td>
+                        <td>27.679.679.300</td>
+                        <td>32.309.236.000</td>
+                        <td>41.185.972.500</td>
+                    </tr>
+
+                    <tr style="height: 5px; background-color: #000;">
+                        <td colspan="10" style="padding:0; border:none;"></td>
+                    </tr>
+
+                    <tr>
+                        <td>PD/DD</td>
+                        <td class="bg-red-med">2,43</td>
+                        <td>0,89</td>
+                        <td class="bg-red-light">1,15</td>
+                        <td>0,80</td>
+                        <td>0,68</td>
+                        <td>0,64</td>
+                        <td class="bg-green-med">0,53</td>
+                        <td class="bg-green-light">0,58</td>
+                        <td>0,67</td>
+                    </tr>
+                
+                    <tr>
+                        <td>F/K</td>
+                        <td class="bg-green-med">5,10</td>
+                        <td class="bg-green-light">5,46</td>
+                        <td>8,84</td>
+                        <td class="bg-green-med">5,66</td>
+                        <td class="bg-green-med">4,94</td>
+                        <td class="bg-red-med">15,85</td>
+                        <td class="bg-red-light">12,08</td>
+                        <td class="bg-red-light">10,81</td>
+                        <td class="bg-red-light">11,89</td>
+                    </tr>
+
+                    <tr>
+                        <td>FD/FAVÖK</td>
+                        <td>29,51</td>
+                        <td>26,88</td>
+                        <td class="bg-red-med">207,84</td>
+                        <td class="bg-red-light">120,92</td>
+                        <td>27,50</td>
+                        <td class="bg-green-med">18,25</td>
+                        <td class="bg-red-light">50,43</td>
+                        <td>26,98</td>
+                        <td class="bg-green-med">17,88</td>
+                    </tr>
+
+                    <tr>
+                        <td>PD/NFK</td>
+                        <td class="bg-green-med">35,03</td>
+                        <td class="bg-red-light">93,05</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td class="bg-red-med">103,17</td>
+                        <td class="bg-green-light">54,02</td>
+                        <td class="bg-red-med">117,42</td>
+                        <td>61,20</td>
+                        <td class="bg-green-med">34,59</td>
+                    </tr>
+
+                    <tr>
+                        <td>FD/NS</td>
+                        <td>0,81</td>
+                        <td class="bg-green-med">0,49</td>
+                        <td class="bg-red-med">3,05</td>
+                        <td>1,03</td>
+                        <td class="bg-green-med">0,55</td>
+                        <td class="bg-green-dark">0,40</td>
+                        <td class="bg-red-light">1,43</td>
+                        <td>0,80</td>
+                        <td class="bg-green-light">0,64</td>
+                    </tr>
+
+                    <tr>
+                        <td>NFK/PD</td>
+                        <td class="bg-green-med">2,9%</td>
+                        <td class="bg-yellow">1,1%</td>
+                        <td class="bg-red-med">-0,1%</td>
+                        <td class="bg-red-med">-0,7%</td>
+                        <td class="bg-yellow">1,0%</td>
+                        <td class="bg-green-light">1,9%</td>
+                        <td class="bg-yellow">0,9%</td>
+                        <td class="bg-green-light">1,6%</td>
+                        <td class="bg-green-med">2,9%</td>
+                    </tr>
+                    <tr style="height: 5px; background-color: #000;">
+                <td colspan="10" style="padding:0; border:none;"></td>
+            </tr>
+
+            <tr>
+                <td>Cari Oran</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+            </tr>
+
+            <tr>
+                <td>Likidite Oranı</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+            </tr>
+
+            <tr>
+                <td>Nakit Oranı</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>4</td>
+                <td>8</td>
+                <td>9</td>
+                <td>11</td>
+            </tr>
+
+            <tr>
+                <td>Borçluluk Oranı</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+            </tr>
+
+            <tr>
+                <td>Kaldıraç Oranı</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+            </tr>
+
+            <tr>
+                <td>Finansal Borç Oranı</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+            </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+  
+    <div id="bistdata-analiz-icerik" class="sekme-icerik gizli">
+      
+        <div class="panel-row-tek">
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Satışlar</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart2-satis" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">FAVÖK</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart2-favok" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Net Kar</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart2-netkar" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel-row-tek">
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Brüt Kar</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart2-brutkar" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">EFK</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart2-efk" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">HBK</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart2-hbk" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-row-tek">
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Özkaynaklar</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart2-ozkaynaklar" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Duran Varlıklar</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart2-duran-varliklar" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Dönen Varlıklar</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart2-donen-varliklar" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-row-tek">
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Nakit ve Benzerleri</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart2-nakit" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Stoklar</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart2-stoklar" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Ticari Alacaklar</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart2-ticari-alacaklar" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-row-tek">
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Finansal Yatırımlar</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart2-finyat" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Maddi Duran Varlıklar</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart2-maddurvar" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Maddi Olmayan Duran Varlıklar</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart2-madolmdurvar" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-row-tek">
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Toplam Yükümlülükler</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart2-toplam-yukumlulukler" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">KVY</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart2-kvy" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">UVY</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart2-uvy" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-row-tek">
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Finansal Borçlar</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart2-finansal-borclar" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Ticari Borçlar</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart2-ticari-borclar" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Net Borç</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart2-net-borc" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+        /* Oranlar Sekmesi Grafik Panelleri */
+
+        
+        /* Oranlar Sekmesi Grafik Panelleri */
+    
+
+
+        <div class="panel-row-tek" style="margin-top: 20px;">
+    
+    <div class="grafik-panel">
+        <div class="panel-butonlar-ust">
+            <button class="info-btn" data-info-target="info-cari-oran" title="Detaylı Bilgi">ℹ️</button>
+            <a href="https://www.youtube.com/watch?v=CARIORAN_ID" target="_blank" class="youtube-btn" title="İnceleme Videosu">▶️</a>
+        </div>
+        <h3 class="panel-baslik">Cari Oran</h3>
+        <div id="info-cari-oran" class="bilgi-notu gizli">
+            <p><strong>Cari Oran:</strong> İşletmenin kısa vadeli borçlarını ödeme gücünü gösterir...</p>
+        </div>
+        <div class="grafik-yer-tutucu">
+            <div class="grafik-alani">
+                <canvas id="chart10-cari-oran" height="260"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="grafik-panel">
+        <div class="panel-butonlar-ust">
+            <button class="info-btn" data-info-target="info-likidite-oran" title="Detaylı Bilgi">ℹ️</button>
+            <a href="https://www.youtube.com/watch?v=LIKIDITE_ID" target="_blank" class="youtube-btn" title="İnceleme Videosu">▶️</a>
+        </div>
+        <h3 class="panel-baslik">Likidite Oranı</h3>
+        <div id="info-likidite-oran" class="bilgi-notu gizli">
+            <p><strong>Likidite Oranı:</strong> Stoklar hariç, borç ödeme gücünü gösterir...</p>
+        </div>
+        <div class="grafik-yer-tutucu">
+            <div class="grafik-alani">
+                <canvas id="chart10-likidite" height="260"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="grafik-panel">
+        <div class="panel-butonlar-ust">
+            <button class="info-btn" data-info-target="info-nakit-oran" title="Detaylı Bilgi">ℹ️</button>
+            <a href="https://www.youtube.com/watch?v=NAKITORAN_ID" target="_blank" class="youtube-btn" title="İnceleme Videosu">▶️</a>
+        </div>
+        <h3 class="panel-baslik">Nakit Oran</h3>
+        <div id="info-nakit-oran" class="bilgi-notu gizli">
+            <p><strong>Nakit Oran:</strong> İşletmenin sadece nakit ve nakit benzerleri ile borçlarını ödeme gücünü gösterir...</p>
+        </div>
+        <div class="grafik-yer-tutucu">
+            <div class="grafik-alani">
+                <canvas id="chart10-nakit" height="260"></canvas>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+        <div class="panel-row-tek">
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Hazır Değerler Oranı</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart10-hazir-degerler" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Ekonomik Rantabilite Oranı</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart10-ekonomik-rantabilite" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Mali  Rantabilite Oranı</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart10-mali-rantabilite" height="260"></canvas>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <div id="finansal-veriler-icerik" class="sekme-icerik gizli">Finansal Veriler İçeriği</div>
+    <div id="bildirimler-icerik" class="sekme-icerik gizli">Bildirimler İçeriği</div>
+    
+    <div id="hisseler-icerik" class="content-box gizli">Hisseler Sayfası</div>
+    <div id="izleme-listesi-icerik" class="content-box gizli">İzleme Listesi Sayfası</div>
+    <div id="bilanco-icerik" class="content-box gizli">Bilanço Sayfası</div>
+    <div id="gelir-tablosu-icerik" class="content-box gizli">Gelir Tablosu Sayfası</div>
+    <div id="nakit-akis-icerik" class="content-box gizli">Nakit Akış Sayfası</div>
+    <div id="oranlar-icerik" class="content-box gizli">Oranlar Sayfası</div>
+    <div id="marjlar-icerik" class="content-box gizli">Marjlar Sayfası</div>
+    <div id="is-iliskisi-icerik" class="content-box gizli">İş İlişkisi Sayfası</div>
+    <div id="halka-arz-icerik" class="content-box gizli">Halka Arz Sayfası</div>
+    <div id="finansal-okur-icerik" class="content-box gizli">Finansal Okur-yazarlık Sayfası</div>
+    <div id="hakkimizda-icerik" class="content-box gizli">Hakkımızda Sayfası</div>
+    <div id="yasal-uyari-icerik" class="content-box gizli">Yasal Uyarı Sayfası</div>
+    <div id="geri-alim-icerik" class="content-box gizli">Geri Alım Sayfası</div>
+    <div id="bildirimler-icerik" class="content-box gizli">Bildirimler Sayfası</div>
+
+</div>
+    </div>
+    <script src="script.js"></script>
+    
+</body>
+</html>
