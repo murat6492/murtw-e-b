@@ -395,3 +395,48 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// =======================
+//  ARAMA SİSTEMİ
+// =======================
+
+// 1) HTML içindeki arama kutusu
+const searchInput = document.querySelector('.arama-kutusu input');
+const searchButton = document.querySelector('.arama-kutusu button');
+
+// 2) Tıklanınca arama çalışsın
+searchButton.addEventListener('click', () => {
+    const hisse = searchInput.value.trim().toUpperCase();
+    if (!hisse) return;
+
+    console.log("Aranan hisse:", hisse);
+
+    // Bilanço dosya adı formatı:
+    const fileName = `${hisse} (TRY)__bilanço.json`;
+
+    // GitHub JSON URL
+    const url = `https://raw.githubusercontent.com/murat6492/my-fin-data/gh-pages/${fileName}`;
+
+    console.log("Kontrol edilen URL:", url);
+
+    // 3) Veriyi çek
+    fetch(url)
+        .then(res => {
+            if (!res.ok) {
+                console.error("Dosya bulunamadı:", fileName);
+                alert("Bu hisse için veri bulunamadı!");
+                return null;
+            }
+            return res.json();
+        })
+        .then(data => {
+            if (!data) return;
+
+            console.log("Veri başarıyla alındı:", data);
+
+            // Şimdilik sadece console’a yazıyoruz
+            // Sonraki adımda tablo ve grafiklere aktaracağız
+        })
+        .catch(err => {
+            console.error("Fetch hatası:", err);
+        });
+});
