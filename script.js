@@ -352,6 +352,73 @@ function renderAllCharts() {
     // YENİ ÇAĞRILAR SONU
 }
 
+
+// JSON dosyalarının bulunduğu repo (değiştirme!)
+const DATA_BASE_URL = "https://raw.githubusercontent.com/murat6492/my-fin-data/gh-pages/data/";
+
+function sanitizeTicker(t) {
+    return t.trim().toUpperCase();
+}
+
+async function fetchJSONFromGitHub(filename) {
+    const url = DATA_BASE_URL + encodeURIComponent(filename);
+
+    try {
+        const res = await fetch(url);
+        if (!res.ok) return null;
+        return await res.json();
+    } catch (err) {
+        console.error("JSON alınamadı:", err);
+        return null;
+    }
+}
+
+// Olası dosya adları (sende hangi format varsa ona göre genişletiriz)
+function guessFilenames(ticker) {
+    return [
+        `${ticker} (TRY)__bilanço.json`,
+        `${ticker} (TRY)__gelir_tablosu__çeyreklik_.json`,
+        `${ticker} (TRY)__gelir_tablosu__yıllıklan__.json`,
+        `${ticker} (TRY)__nakit_akış__çeyreklik_.json`,
+        `${ticker} (TRY)__nakit_akış__yıllıklan__.json`,
+        `${ticker} (TRY)__sayfa1.json`,
+        `${ticker}.json`
+    ];
+}
+
+// En uygun JSON dosyasını bul ve veriyi getir
+async function loadTicker(ticker) {
+    ticker = sanitizeTicker(ticker);
+
+    const guesses = guessFilenames(ticker);
+
+    for (const file of guesses) {
+        const data = await fetchJSONFromGitHub(file);
+        if (data) {
+            console.log("Bulunan dosya:", file);
+            console.log("Veri:", data);
+
+            // Buraya grafik ve tablo güncelleme kodlarını yazacağız
+            alert(`Veri bulundu: ${file}\nConsole'da görebilirsin.`);
+
+            return data;
+        }
+    }
+
+    alert("Bu hisse için JSON bulunamadı: " + ticker);
+    return null;
+}
+
+// Arama butonu tıklanınca
+document.getElementById("hisseAraBtn").addEventListener("click", () => {
+    const ticker = document.getElementById("hisseInput").value;
+    if (!ticker) return;
+    loadTicker(ticker);
+});
+
+
+
+
  // --- JAVASCRIPT SONU ---
     
     // Tablo satırlarına hover efekti eklemek için basit bir script.
