@@ -1,0 +1,1057 @@
+/* Genel Sıfırlama ve Box Model */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Koyu Tema Değişkenleri (Görseldeki Ana Renkler) */
+:root {
+    --ana-koyu: #080811; /* Ana arka plan */
+    --sol-sutun: #161625; /* Sol ve Sağ sütun arka planı */
+    --ana-mavi: #26c3c9f5; /* Vurgu Mavisi */
+    --hisse-kutu: #0e0e1a; /* Paneller/Kutular için daha koyu */
+    --hisse-border: #33334f; /* Çizgi ve kenarlıklar */
+    --hisse-kodu: #ffffff;
+    --hisse-ad: #a0a0c0;
+    --menü-hover: #3b3b5c;
+    --artti-yesil: #20c246;
+    --sol-genislik: 200px;
+    --sag-genislik: 0px;
+}
+
+/* Temel Sayfa Yapısı */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--ana-koyu);
+    color: var(--hisse-ad);
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding-top: 0; 
+    
+    /* YENİ EKLE: Sayfa içeriği kısa olsa bile dikey kaydırma çubuğunu koru */
+    overflow-y: scroll; 
+}
+
+
+/* --- HEADER BANDI (Üst Şerit) --- */
+.header-band {
+    /* DEĞİŞTİ: Artık sabit değil, üst boşluğu kapatmak için etkisizleştirildi */
+    position: static;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: 0;
+    background-color: transparent; 
+    border-bottom: none;
+    display: none; /* Artık kullanılmayacağı için gizlendi */
+    z-index: 1000;
+}
+
+.tema-buton {
+    position: static; 
+    margin-right: 20px;
+    background: transparent;
+    color: #ffd700; 
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.kullanici-alani {
+    color: var(--hisse-ad);
+    font-size: 2em;
+}
+.kullanici-alani i {
+    cursor: pointer;
+}
+
+/* --- SOL SÜTUN (MENÜ) --- */
+.sol-sutun {
+    position: fixed;
+    /* DEĞİŞTİ: En üste çekildi */
+    top: 0; 
+    left: 0;
+    width: var(--sol-genislik);
+    /* DEĞİŞTİ: Tam ekran yüksekliğinde */
+    height: 100vh; 
+    background-color: var(--sol-sutun);
+    border-right: 1px solid var(--hisse-border);
+    padding: 15px 10px;
+    overflow-y: auto;
+    z-index: 900;
+    padding-bottom: 60px;
+}
+.sol-sutun::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sol-sutun::-webkit-scrollbar-thumb {
+    background: #444444;
+    border-radius: 10px;
+}
+
+.sol-sutun::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* --- YENİ EKLENEN KURAL: SOL SÜTUN İÇİ ÜST AYAR ALANI --- */
+.ayarlar-ust {
+    display: flex;
+    justify-content: space-between; /* İkonları kenarlara yayar */
+    align-items: center;
+    padding: 0 5px 15px 5px; /* Altına boşluk bırakır */
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--hisse-border); /* Altına ayırıcı çizgi */
+}
+
+/* Tema butonunun sol sütun içindeki yerini ayarlar */
+.sol-sutun .tema-buton {
+    margin-right: 0; 
+    order: 1; /* Solda kalır */
+}
+/* Kullanıcı alanının sol sütun içindeki yerini ayarlar */
+.sol-sutun .kullanici-alani {
+    order: 2; /* Sağda kalır */
+    font-size: 1.8em; /* Boyutu biraz küçülttüm */
+}
+
+.logo-alani {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Ortalansın */
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.logo-alani h2 {
+    color: white;
+    font-size: 1.1em; /* Biraz daha küçük */
+    font-weight: 600;
+    margin: 0;
+    border-bottom: none; /* Alt çizgi kaldırıldı, daha sade */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bistdatas-logo {
+    width: 150px;  /* 40px’ten küçültüldü */
+    height: auto;
+    display: block;
+    flex-shrink: 0;
+    filter: brightness(0.95) contrast(1.1); /* Logoyu daha net gösterir */
+}
+
+/* Arama Kutusu */
+.arama-kutusu {
+    display: flex;
+    margin-bottom: 15px;
+    background-color: var(--hisse-kutu);
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid var(--hisse-border);
+}
+.arama-kutusu input {
+    flex-grow: 1;
+    border: none;
+    padding: 8px;
+    background: transparent;
+    color: white;
+    outline: none;
+}
+.arama-kutusu button {
+    background-color: var(--ana-mavi);
+    color: white;
+    border: none;
+    padding: 8px 10px;
+    cursor: pointer;
+}
+
+/* Menü Stilleri */
+.sol-menü, .alt-menü {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.sol-menü li, .alt-menü li {
+    margin-bottom: 5px;
+}
+.sol-menü a, .alt-menü a, .toggle-menu {
+    display: block;
+    padding: 8px 10px;
+    color: var(--hisse-ad);
+    text-decoration: none;
+    font-size: 0.75em;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+.sol-menü a:hover, .alt-menü a:hover, .toggle-menu:hover {
+    background-color: var(--menü-hover);
+    color: white;
+}
+.sol-menü a i {
+    margin-right: 8px;
+}
+.alt-menü-kapsayici {
+    margin-bottom: 15px;
+    padding-top: 10px;
+    border-top: 1px solid var(--hisse-border);
+}
+.menu-baslik {
+    color: white;
+    font-size: 1em;
+    margin: 5px 0 10px 10px;
+}
+.sub-menu {
+    padding-left: 10px;
+    margin-top: 5px;
+    border-left: 2px solid var(--hisse-border);
+    transition: max-height 0.3s ease-out;
+    overflow: hidden;
+    max-height: 200px;
+}
+.sub-menu.gizli {
+    max-height: 0;
+    margin: 0;
+    padding: 0;
+    border-left: none;
+}
+.alt-menü a.aktif {
+    background-color: var(--ana-mavi);
+    color: white;
+}
+
+/* Reklam Alanları */
+.reklam-alani {
+    text-align: center;
+    padding: 50px;
+    background-color: #2b2b4d;
+    color: #6a6a9b;
+    border-radius: 5px;
+}
+.reklam-alani.sol {
+    height: 150px;
+    margin-top: 20px;
+}
+.reklam-alani.ust {
+    height: 50px;
+    margin-bottom: 25px;
+}
+.reklam-alani.sag {
+    flex-grow: 1; 
+    margin-top: 20px;
+}
+
+/* --- ANA İÇERİK ve SAĞ SÜTUN YÖNETİMİ --- */
+.ana-icerik-kapsayici {
+    /* KRİTİK DÜZELTME: Orta sütun kaymasını önler */
+    margin-left: 0 !important; 
+    margin-right: 0 !important;
+    width: 100% !important; 
+    
+    /* DÜZELTME 1: Sütun genişliği (200px) + İç boşluk (20px) = 220px olarak ayarlandı. */
+    padding-left: calc(var(--sol-genislik) + 20px);
+    padding-right: calc(var(--sag-genislik) + 20px);
+    
+    /* DÜZELTME 2: Sadece dikey boşluk korundu. */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+    overflow-y: auto; 
+    overflow-x: hidden;
+}
+
+.sag-sutun {
+    position: fixed;
+    top: 0; 
+    right: 0;
+    width: var(--sag-genislik);
+    height: 100vh; 
+    background-color: var(--sol-sutun);
+    border-left: 1px solid var(--hisse-border);
+    padding: 15px 10px;
+    overflow-y: auto;
+    /* YENİ EKLE: Sağ sütun içindeki yatay taşmayı engeller */
+    overflow-x: hidden; 
+    display: none;
+    flex-direction: column;
+    z-index: 900;
+}
+
+.portfoy-panel {
+    background-color: var(--hisse-kutu);
+    border: 1px solid var(--hisse-border);
+    padding: 15px;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+}
+.portfoy-panel h3 {
+    color: #ffd700;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+
+/* --- HİSSE BAŞLIK ALANI --- */
+.hisse-baslik-alan {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    /* DÜZELTME: Alt boşluk 20px'ten 10px'e düşürüldü */
+    padding-bottom: 10px;
+    /* DÜZELTME: Alt kenar boşluğu 20px'ten 10px'e düşürüldü */
+    margin-bottom: 10px;
+    border-bottom: 2px solid var(--hisse-border);
+}
+
+.hisse-sol {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.hisse-kodu {
+    font-size: 2.5em;
+    color: var(--hisse-kodu);
+    margin: 0;
+}
+.hisse-ad {
+    color: var(--hisse-ad);
+    /* DÜZELTME: Alt kenar boşluğu 10px'ten 5px'e düşürüldü */
+    font-size: 1.1em;
+    margin-bottom: 5px; 
+}
+.fiyat-bilgi {
+    display: flex;
+    align-items: flex-end;
+}
+.fiyat {
+    font-size: 3em;
+    font-weight: bold;
+    color: white;
+    line-height: 1;
+}
+.yuzde {
+    font-size: 1.5em;
+    font-weight: bold;
+    /* DÜZELTME: Soldan boşluk 15px'ten 10px'e düşürüldü */
+    margin-left: 10px;
+}
+.artti { color: var(--artti-yesil); }
+
+/* KÜÇÜLTÜLMÜŞ HİSSE BİLGİLERİ */
+/* style.css dosyasında bu kısmı bulun ve GÜNCELLEYİN: */
+.hisse-sag {
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; /* Kutular arası boşluğu 12px'e çıkardık */
+    width: auto; 
+    flex-shrink: 0;
+    
+    /* DEĞİŞTİ: Sol boşluğu 15px'e çıkardık */
+    margin-left: 15px !important; 
+    
+    max-width: 300px;
+}
+/* style.css dosyasında bu kısmı bulun ve DEĞİŞTİRİN: */
+.ust-oran-kutu {
+    background-color: var(--hisse-kutu);
+    border: 1px solid var(--hisse-border);
+    
+    /* DEĞİŞTİ: Sağ ve sol boşluğu 20px'e çıkararak görünümü ferahlatıyoruz */
+    padding: 3px 20px !important; 
+    
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    /* Yükseklik kontrolü için minimum yükseklik ekleyebiliriz */
+    min-height: 40px; 
+    justify-content: center;
+}
+.ust-oran-kutu label {
+    font-size: 0.7em; 
+    color: var(--hisse-ad);
+    line-height: 1; /* Satır yüksekliğini düşürdük */
+}
+.ust-oran-kutu input {
+    background: transparent;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9em; 
+    outline: none;
+    text-align: right;
+    padding: 0;
+    line-height: 1.2;
+}
+
+
+/* --- ANA SEKME MENÜSÜ (GÜNCELLENDİ) --- */
+.sekme-menü {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: flex-start;
+    border-bottom: 2px solid var(--hisse-border);
+    margin-bottom: 20px;
+}
+.sekme-baslik {
+    padding: 6px 10px; 
+    font-size: 0.9em; 
+    color: var(--hisse-ad);
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s, border-bottom 0.2s;
+    border-bottom: 2px solid transparent;
+}
+.sekme-baslik:hover {
+    color: white;
+}
+.sekme-baslik.aktif {
+    color: var(--ana-mavi);
+    border-bottom: 2px solid var(--ana-mavi);
+}
+
+/* --- İÇERİK PANELLERİ --- */
+.sekme-icerik {
+    min-height: 500px;
+}
+.gizli { display: none !important; }
+
+
+.panel-row-tek { 
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px; 
+    margin-bottom: 25px;
+}
+.oranlar-panel {
+    background-color: var(--hisse-kutu);
+    border: 1px solid var(--hisse-border);
+    border-radius: 5px;
+    padding: 15px;
+}
+.panel-baslik {
+    color: white;
+    font-size: 1.2em;
+    border-bottom: 1px solid var(--hisse-border);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.oranlar-tablosu {
+    display: flex;
+    flex-direction: column;
+}
+.oran-satir {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px dotted var(--hisse-border);
+    font-size: 0.95em;
+}
+.oran-satir:last-child {
+    border-bottom: none;
+}
+.oran-ad {
+    color: var(--hisse-ad);
+}
+.oran-deger {
+    color: white;
+    font-weight: bold;
+}
+
+/* 2. Grafik Paneli Stilleri */
+.grafik-panel {
+    background-color: var(--hisse-kutu);
+    border: 1px solid var(--hisse-border);
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 30px;
+}
+.grafik-yer-tutucu {
+    display: flex;
+    height: 250px; 
+    margin-top: 15px;
+}
+/* Sadece BistData Analizi sekmesinde y-ekseni gizli */
+#bistdata-analiz-icerik .grafik-yer-tutucu .y-ekseni { display: none; }
+.y-ekseni {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: right;
+    width: 60px;
+    font-size: 0.8em;
+    color: var(--hisse-ad);
+    padding-right: 5px;
+}
+
+.grafik-alani {
+    flex-grow: 1;
+    position: relative;
+    border-left: 1px dotted var(--hisse-border);
+    border-bottom: 1px dotted var(--hisse-border);
+}
+
+/* Canvas grafikler tam alanı kaplasın */
+.grafik-alani canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.grafik-cubuklari {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly; 
+    align-items: flex-end;
+}
+.cubuk-konumlandirici {
+    height: var(--yuzde); 
+    width: 10%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+.cubuk {
+    width: 100%;
+    background-color: var(--ana-mavi);
+    height: 100%;
+    border-radius: 2px 2px 0 0;
+    transition: height 0.3s;
+}
+.deger-etiket {
+    position: absolute;
+    top: -25px;
+    color: var(--artti-yesil);
+    font-size: 0.8em;
+    font-weight: bold;
+    white-space: nowrap;
+}
+.ay-etiket {
+    position: absolute;
+    bottom: -20px;
+    color: var(--hisse-ad);
+    font-size: 0.7em;
+    white-space: nowrap;
+}
+
+.grafik-cizgisi {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M0 70 C 10 50, 20 60, 30 40 S 50 30, 60 50 S 80 40, 90 60 L 100 30' fill='none' stroke='%23dc3545' stroke-width='3' vector-effect='non-scaling-stroke' /%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    pointer-events: none; 
+}
+
+/* --- RESPONSIVE TASARIM (Önemli) --- */
+@media (max-width: 1300px) {
+    :root { --sol-genislik: 180px; --sag-genislik: 180px; }
+    /* HİSSE SAĞ KUTUSUNU MOBİLDE 2X2 TUTMAK YERİNE 4X1 SÜTUN YAPTIK */
+    .hisse-sag { 
+        flex-direction: column; 
+        max-width: 250px; 
+    } 
+    .panel-row { grid-template-columns: 1fr 1fr; }
+    .oranlar-panel:nth-child(3) { grid-column: span 2; } 
+}
+
+@media (max-width: 900px) {
+    :root { --sol-genislik: 100%; --sag-genislik: 100%; }
+    /* DEĞİŞTİ: Mobil görünümde de üst boşluk kaldırıldı */
+    body { flex-direction: column; padding-top: 0; }
+    .header-band { position: relative; width: 100%; }
+    .sol-sutun, .sag-sutun { 
+        position: relative; 
+        width: 100%; 
+        height: auto; 
+        border-right: none; 
+        border-left: none; 
+        top: 0; 
+    }
+    /* MOBİL DÜZELTME: Mobil cihazlarda padding 10px olarak ayarlandı. */
+    .ana-icerik-kapsayici { 
+        margin: 0; 
+        width: 100% !important; 
+        padding: 10px; /* Sadece 10px yatay ve dikey padding */
+        padding-left: 10px; 
+        padding-right: 10px; 
+    }
+    
+    .hisse-baslik-alan { flex-direction: column; }
+    .hisse-sag { 
+        width: 100%; 
+        grid-template-columns: 1fr; /* Mobil'de tek sütun (4x1) */
+        margin-top: 5px; 
+        margin-left: 0; 
+        max-width: 100%;
+        
+        /* Mobil'de kesinlikle tek sütun: */
+        display: flex;
+        flex-direction: column;
+    }
+    .fiyat { font-size: 2.5em; }
+    .panel-row { grid-template-columns: 1fr; gap: 10px; }
+    .oranlar-panel:nth-child(3) { grid-column: span 1; }
+    
+    .sol-sutun { display: none; }
+}
+/* ================================================= */
+/* YENİ ANASAYFA STİLLERİ (Ekran Görüntüsü 289) */
+/* ================================================= */
+
+/* Tüm ana içerik sayfaları için temel konteyner */
+.content-box {
+    padding: 10px 0; 
+}
+.content-box.gizli {
+    display: none;
+}
+
+/* Üst Piyasa Kutuları Bandı */
+.piyasa-verileri-band {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.piyasa-kutu {
+    flex-grow: 1;
+    min-width: 120px;
+    background-color: var(--hisse-kutu);
+    border: 1px solid var(--hisse-border);
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.piyasa-baslik {
+    color: var(--hisse-ad);
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+.piyasa-deger {
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.piyasa-degisim {
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.piyasa-degisim.artti { color: var(--artti-yesil); }
+.piyasa-degisim.dustu { color: #dc3545; } 
+
+
+/* Orta Sıralama Listeleri */
+.siralama-listeleri {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.siralama-kutu {
+    background-color: var(--hisse-kutu);
+    border: 1px solid var(--hisse-border);
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.siralama-baslik {
+    color: white;
+    font-size: 1.1em;
+    border-bottom: 1px solid var(--hisse-border);
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+}
+
+.liste-satir {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    font-size: 0.9em;
+}
+
+.hisse-kisa {
+    color: white;
+    font-weight: bold;
+    width: 30%;
+}
+
+.hisse-fiyat {
+    color: var(--hisse-ad);
+    text-align: center;
+    width: 35%;
+}
+
+.hisse-degisim, .hisse-hacim {
+    font-weight: bold;
+    text-align: right;
+    width: 35%;
+}
+.hisse-degisim.artti { color: var(--artti-yesil); }
+.hisse-degisim.dustu { color: #dc3545; }
+
+/* Alt KAP Bildirimleri */
+.kap-bildirimleri-band {
+    background-color: var(--hisse-kutu);
+    border: 1px solid var(--hisse-border);
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.kap-baslik {
+    color: white;
+    font-size: 1.2em;
+    text-align: center;
+    border-bottom: 1px solid var(--hisse-border);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.kap-icerik-kutu {
+    text-align: center;
+    height: 300px; 
+    background-color: #0e0e1a;
+    border: 1px solid var(--hisse-border);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.kap-icerik-kutu .kap-baslik {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Responsive düzenleme (Sıralama Listeleri için) */
+@media (max-width: 1000px) {
+    .siralama-listeleri {
+        grid-template-columns: 1fr; /* 1000px altı tek sütun */
+    }
+}
+@media (max-width: 700px) {
+    .piyasa-verileri-band {
+        flex-wrap: wrap;
+    }
+    .piyasa-kutu {
+        min-width: 45%;
+        flex-grow: 1;
+    }
+}
+/* style.css dosyasına TEKRAR EKLENMESİ GEREKEN TEKLİ PANEL STİLLERİ: */
+
+/* --- TEKLİ PANEL LİSTESİ (Ödenmiş Sermaye, Piyasa Değeri vb. için) --- */
+/* style.css dosyasındaki TEKLİ PANEL BÖLÜMÜNÜN KESİN VE KOMPAKT HALİ: */
+
+/* Ana kapsayıcı (Alt alta sıralamayı sağlar) */
+.tekli-panel-listesi {
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; /* Paneller arası boşluğu minimuma indirdik */
+    margin-bottom: 20px; 
+    height: 50px;
+}
+
+/* Tek bir panelin stili (YÜKSEKLİĞİ BURADA KONTROL EDİLİR) */
+.ozet-bilgi-panel {
+    background-color: var(--hisse-kutu);
+    border: 1px solid var(--hisse-border);
+    border-radius: 6px;
+    padding: 6px 1px; /* Dikey boşluğu (yüksekliği) en aza indirdik (6px) */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Başlık Yazısı */
+.ozet-bilgi-baslik {
+    font-size: 0.85em; /* Başlık fontunu çok küçülttük */
+    color: var(--hisse-ad);
+}
+
+/* Değer Yazısı */
+.ozet-bilgi-deger {
+    font-size: 1em; /* Değer fontunu standart boyuta yakın tuttuk */
+    font-weight: bold;
+    color: var(--ana-mavi); 
+}
+/* style.css dosyasına eklenecek YENİ BUTON STİLLERİ: */
+
+/* Kullanıcı İşlemleri Kutusu */
+.kullanici-islemleri-kutusu {
+    background-color: var(--hisse-kutu);
+    border: 1px solid var(--hisse-border);
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px; /* Altındaki reklam alanından boşluk bırakır */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Butonları ortalar */
+    gap: 10px; /* Butonlar arası boşluk */
+    text-align: center;
+}
+
+.kullanici-islemleri-kutusu .giris-kayit-btn {
+    background-color: var(--ana-mavi); /* Ana mavimiz */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    font-size: 1em;
+    cursor: pointer;
+    width: 100%; /* Kutunun genişliği kadar olsun */
+    max-width: 200px; /* Maksimum genişlik vererek çok uzamasını engeller */
+    transition: background-color 0.2s ease;
+}
+
+.kullanici-islemleri-kutusu .giris-kayit-btn:hover {
+    background-color: #0056b3; /* Hover rengi */
+}
+
+.kullanici-islemleri-kutusu .portfoy-takip-btn {
+    background-color: transparent; /* Şeffaf arka plan */
+    color: var(--ana-mavi); /* Yazı rengi mavi */
+    border: 1px solid var(--ana-mavi); /* Mavi çerçeve */
+    border-radius: 4px;
+    padding: 10px 15px;
+    font-size: 1em;
+    cursor: pointer;
+    width: 100%; /* Kutunun genişliği kadar olsun */
+    max-width: 200px; /* Maksimum genişlik vererek çok uzamasını engeller */
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+/* Sol menü altındaki giriş/kayıt ol kutusu */
+
+
+.sidebar-login-box {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    width: 200px; /* menü genişliğiyle aynı OLMALI */
+    display: flex;
+    justify-content: center;
+    z-index: 9999;
+}
+
+
+/* Butonun stili */
+.sidebar-login-btn {
+    width: 1000%;             /* Menünün içinde güzel durması için */
+    padding: 12px 0;
+    background: #4f46e5;    /* ChatGPT tarzı mor */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.sidebar-login-btn:hover {
+    background: #4338ca;
+}
+
+ /* --- CSS BAŞLANGICI --- */
+    
+    /* Genel Ayarlar */
+    .financial-table-container {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 20px;
+        overflow-x: auto; /* Mobilde taşmayı önler, kaydırma çubuğu ekler */
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        color: #000000; /*(Tam Siyah)*/
+    }
+
+    table.financial-table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 900px; /* Tablonun çok sıkışmasını engeller */
+        font-size: 13px;
+        background-color: #fff;
+        text-align: center;
+        border: 2px solid #000; /* Dış kalın çerçeve */
+    }
+
+    /* Başlıklar ve Hücreler */
+    .financial-table th, 
+    .financial-table td {
+        border: 1px solid #000; /* Hücre kenarlıkları */
+        padding: 8px 4px;
+        white-space: nowrap;
+    }
+
+    /* İlk Sütun (Etiketler) Ayarları */
+    .financial-table td:first-child,
+    .financial-table th:first-child {
+        text-align: left;
+        font-weight: bold;
+        background-color: #fff;
+        position: sticky; /* İsteğe bağlı: Sola kaydırırken başlığı sabitler */
+        left: 0;
+        z-index: 2;
+        border-right: 2px solid #000;
+    }
+
+    /* Header (Tarih Satırı) */
+    .financial-table thead th {
+        background-color: #fff;
+        font-weight: bold;
+    }
+
+    /* RENK SINIFLARI (Görseldeki Renkler) */
+    
+    /* Bej (Üst Veriler) */
+    .bg-beige { background-color: #FFF2CC; }
+
+    /* ==========================================
+   KÖTÜ / YÜKSEK DEĞER (RED SCALE)
+   ========================================== */
+
+/* Koyu Kırmızı (En kötü) */
+.bg-red-dark { background-color: #C62828; color: #ffffff; } 
+
+/* Orta Kırmızı */
+.bg-red-med { background-color: #EF5350; color: #ffffff; }
+
+/* Açık Kırmızı (Soft) */
+.bg-red-light { background-color: #FFCDD2; color: #111111; }
+
+/* ==========================================
+   İYİ / DÜŞÜK DEĞER (GREEN SCALE)
+   ========================================== */
+
+/* Koyu Kurumsal Yeşil (En iyi) */
+.bg-green-dark { background-color: #2E7D32; color: #ffffff; }
+
+/* Orta Yeşil (Denge) */
+.bg-green-med { background-color: #66BB6A; color: #ffffff; }
+
+/* Açık Yeşil (Soft & Premium) */
+.bg-green-light { background-color: #C8E6C9; color: #111111; }
+
+/* ==========================================
+   NÖTR / GEÇİŞ (YELLOW–AMBER SCALE)
+   ========================================== */
+
+/* Altın Sarısı (Merkez/Ortalama) */
+.bg-yellow { background-color: #ebe5b5; color: #111111; }
+
+/* Amber / Light Orange (Orta üstü değer) */
+.bg-orange-light { background-color: #FFE0B2; color: #111111; }
+
+    /* JS Hover Efekti İçin Sınıf */
+    .row-highlight {
+        background-color: #f0f0f0 !important; /* !important renklerin üzerine yazması için */
+        transition: background-color 0.2s;
+    }
+    
+    /* --- CSS BİTİŞİ --- */
+
+/* YENİ EKLENECEK CSS STILLERİ VEYA GÜNCELLEMELER */
+
+.grafik-panel {
+    position: relative; /* Butonların konumunu buna göre ayarlamak için */
+    /* Diğer mevcut stilleriniz burada devam etmeli */
+}
+
+.panel-butonlar-ust {
+    position: absolute; /* Mutlak konumlandırma */
+    top: 10px;          /* Panelden biraz aşağıya */
+    right: 10px;        /* Sağ üst köşeye hizala */
+    z-index: 10;        /* Grafiğin ve başlığın üstünde görünmesini sağla */
+}
+
+/* Eski panel-baslik-container stilini silebilirsiniz. 
+   Bu stil başlığa alt çizgi verecektir (Eğer mevcut CSS'inizde yoksa ekleyin): */
+.panel-baslik {
+    border-bottom: 2px solid #555; /* Başlığa alt çizgi ekle */
+    padding-bottom: 5px;          /* Alt çizgi ile metin arasına boşluk */
+    margin-bottom: 15px;          /* Alt çizgi ile içerik arasına boşluk */
+    text-align: left;             /* Başlığı sola hizala */
+}
+
+/* Buton stilleri önceki gibi kalabilir (info-btn, youtube-btn) */
+.info-btn, .youtube-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    padding: 0 5px;
+    margin-left: 5px;
+    color: #a0a0c0; 
+    transition: color 0.2s;
+    text-decoration: none;
+}
+
+.info-btn:hover, .youtube-btn:hover {
+    color: #007bff;
+}
+
+    /* YENİ EKLENECEK CSS STILLERİ */
+
+.panel-baslik-container {
+    display: flex; /* Başlık ve butonları aynı satıra getir */
+    justify-content: space-between; /* Başlığı sola, butonları sağa iter */
+    align-items: center; /* Dikeyde ortala */
+    margin-bottom: 10px; /* Başlık ile grafik arasına boşluk koyar */
+}
+
+.panel-butonlar button,
+.panel-butonlar a {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    padding: 0 5px;
+    margin-left: 5px; /* Butonlar arasına boşluk */
+    transition: color 0.2s;
+    color: #a0a0c0; /* Açık tema/koyu tema için varsayılan renk */
+    text-decoration: none; /* Link alt çizgilerini kaldır */
+}
+
+.panel-butonlar button:hover,
+.panel-butonlar a:hover {
+    color: #007bff; /* Üzerine gelince renk değiştir */
+}
+
+.bilgi-notu {
+    background-color: #33334f; /* Koyu arka plan */
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-left: 4px solid #007bff; /* Vurgu için kenarlık */
+    font-size: 0.9em;
+}
+
+.gizli {
+    display: none !important; /* JavaScript ile gizlenecek elemanlar için */
+}
+
+/* Koyu Temada Buton renklerini ayarla */
+body.dark .panel-butonlar button,
+body.dark .panel-butonlar a {
+    color: #a0a0c0;
+}
