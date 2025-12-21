@@ -512,5 +512,164 @@ document.querySelectorAll('button[data-ticker]').forEach(btn=>{
   });
 });
 
+    /* ---------- Gelişmiş filename tahmini ---------- */
+function normalizeTickerForFiles(raw){
+  // bazı JSON isimlendirmelerinde " (TRY)" olabiliyor; normalize edip denemeler yapacağız
+  raw = raw.trim();
+  const attempts = [];
+  const plain = raw;
+  const withTry = raw.includes('(TRY)') ? raw : (raw + ' (TRY)');
+  attempts.push(plain);
+  attempts.push(withTry);
+
+  // bazı kullanıcılar ticker sadece ASELS yazıyor; JSON dosyalarında büyük/küçük duyarlılık olabilir
+  return Array.from(new Set(attempts)); // unique
+}
+
+function guessFilenames(ticker){
+  // ticker örnek: "ASELS" veya "ASELS (TRY)"
+  const bases = normalizeTickerForFiles(ticker);
+  const suffixes = [
+    '__bilanço.json',
+    '__bilanço.json', // duplicate safe
+    '__gelir_tablosu__yıllıklan_.json',
+    '__gelir_tablosu__çeyreklik_.json',
+    '__gelir_tablosu__dönemsel_.json',
+    '__nakit_akış__yıllıklan_.json',
+    '__nakit_akış__çeyreklik_.json',
+    '__nakit_akış__dönemsel_.json',
+    '__sayfa1.json',
+    '__income.json',
+    '__cashflow.json',
+    '__balance.json',
+    '.json' // fallback: ticker.json
+  ];
+  const guesses = [];
+  bases.forEach(b => suffixes.forEach(s => guesses.push(b + s)));
+  return guesses;
+}
+
+/* ---------- fetch helper (dosya deneme) ---------- */
+const DATA_BASE_URL = "https://raw.githubusercontent.com/murat6492/my-fin-data/gh-pages/data/"; // <-- gerektiğinde düzenle
+
+async function fetchFirstExistingJSON(ticker){
+  const guesses = guessFilenames(ticker);
+  for(const fn of guesses){
+    const url = DATA_BASE_URL + encodeURIComponent(fn);
+    try {
+      const r = await fetch(url);
+      if (!r.ok) continue;
+      const json = await r.json();
+      return { filename: fn, url, json };
+    } catch(e){
+      // ignore and try next
+    }
+  }
+  return null;
+}
+
+/* ---------- displayStock: grafikleri ve tabloyu güncelle ---------- */
+function safeGetNumber(v){
+  if (v === null || v === undefined) return null;
+  if (typeof v === 'number') return v;
+  const n = Number(String(v).replace(/[^\d\.\-]/g,'')); // strip non-numeric
+  return isNaN(n) ? null : n;
+}
+
+function prepareSeriesFromRows(rows, candidateKeys){
+  // candidateKeys: array of possible field names e.g. ['sales','SATISLAR','Satis']
+  for(const key of candidateKeys){
+    const vals = rows.map(r => safeGetNumber(r[key])).filter(x => x !== null);
+    if (vals.length >= 1) return { key, vals };
+  }
+  return null;
+}
+
+function drawBar(chartHolder, labels, values, label){
+  if (!document.getElementById(chartHolder)) return;
+  const ctx = document.getElementById(chartHolder).getContext('2d');
+  if (window[chartHolder + '_chart']) window[chartHolder + '_chart'].destroy();
+  window[chartHolder + '_chart'] = new Chart(ctx, {
+    type: 'bar',
+    data: { labels: labels, datasets: [{ label: label, data: values }] },
+    options: { responsive:true, maintainAspectRatio:false }
+  });
+}
+
+function displayStockFromJSON(ticker, json){
+  // json beklenen: dizi (records) veya object with array; normalize
+  let rows = [];
+  if (Array.isArray(json)) rows = json;
+  else if (json.records && Array.isArray(json.records)) rows = json.records;
+  else if (json.data && Array.isArray(json.data)) rows = json.data;
+  else if (typeof json === 'object') {
+    // object -> try to find array-valued property
+    for(const k of Object.keys(json)){
+      if (Array.isArray(json[k])) { rows = json[k]; break; }
+    }
+  }
+
+  if (!rows.length){
+    console.warn("displayStock: rows empty or not array", json);
+    document.getElementById('data-status') && (document.getElementById('data-status').textContent = 'Veri yok veya dizi değil');
+    return;
+  }
+
+  // candidate keys for sales/net (expand as needed)
+  const salesKeys = ['sales','SATISLAR','Satis','satis','Satış','SATIS','SATIS_TL','satis_tl'];
+  const netKeys   = ['net','NET','Net','kar','Kar','NET_KAR','net_kar','net_profit'];
+
+  const salesSeries = prepareSeriesFromRows(rows, salesKeys);
+  const netSeries   = prepareSeriesFromRows(rows, netKeys);
+
+  const labels = rows.map((r,i) => r.period || r.year || r.quarter || `#${i+1}`);
+
+  if (salesSeries){
+    drawBar('chart-sales', labels.slice(0, salesSeries.vals.length), salesSeries.vals, salesSeries.key);
+  } else {
+    // clear if no data
+    if (window['chart-sales_chart']) window['chart-sales_chart'].destroy();
+  }
+
+  if (netSeries){
+    drawBar('chart-profit', labels.slice(0, netSeries.vals.length), netSeries.vals, netSeries.key);
+  } else {
+    if (window['chart-profit_chart']) window['chart-profit_chart'].destroy();
+  }
+
+  document.getElementById('data-json-display').style.display = 'block';
+  document.getElementById('data-json-display').textContent = JSON.stringify(rows.slice(0,50), null, 2);
+  document.getElementById('data-status').textContent = `Veri yüklendi: ${ticker} — ${rows.length} satır bulundu`;
+}
+
+/* ---------- loadAndShowTicker: mevcut fetch fonksiyonu ile bağlama ---------- */
+async function loadAndShowTicker(ticker){
+  const res = await fetchFirstExistingJSON(ticker);
+  if (!res){
+    alert('Bu hisse için JSON bulunamadı: ' + ticker);
+    return;
+  }
+  console.log("loadAndShowTicker -> using", res.filename, res.url);
+  displayStockFromJSON(ticker, res.json);
+}
+
+/* ---------- Sol sütun butonlarını data-ticker ile bağlama ---------- */
+document.querySelectorAll('button[data-ticker]').forEach(btn=>{
+  btn.addEventListener('click', (e)=>{
+    const tk = btn.dataset.ticker;
+    if (!tk) return;
+    loadAndShowTicker(tk);
+  });
+});
+
+/* Eğer butonlarda data-ticker yoksa, generic bağlama (buton text'ine göre) */
+document.querySelectorAll('.left-panel button, .sidebar button, .sol-btn, #leftColumn button').forEach(btn=>{
+  if (btn.dataset && btn.dataset.ticker) return; // atla, zaten bağlandı
+  btn.addEventListener('click', ()=>{
+    const text = (btn.dataset.label || btn.innerText || '').trim();
+    if (text) loadAndShowTicker(text);
+  });
+});
+
 
   
