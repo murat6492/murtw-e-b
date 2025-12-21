@@ -504,4 +504,13 @@ searchButton.addEventListener('click', () => {
             // Sonraki adımda tablo ve grafiklere aktaracağız
         })
 
+    // Butonlara data-ticker verilmişse otomatik yüklesin
+document.querySelectorAll('button[data-ticker]').forEach(btn=>{
+  btn.addEventListener('click',(e)=>{
+    const tk = btn.dataset.ticker;
+    if(tk) loadAndShowTicker ? loadAndShowTicker(tk) : loadTicker(tk);
+  });
+});
+
+
   
