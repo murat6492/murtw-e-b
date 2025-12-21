@@ -1,59 +1,79 @@
 console.log("script.js yüklendi");
 
 // ==========================
-// 1) SOL SÜTUN BUTONLARI
+// 1) SOL MENÜ & ALT MENÜ SEKMELERİ
 // ==========================
 document.addEventListener("click", function (e) {
-  const btn = e.target.closest("button");
-  if (!btn) return;
 
-  const targetId = btn.dataset.target;
-  if (!targetId) return;
+  // ANA / ALT MENÜ LİNKLERİ
+  const link = e.target.closest("a[data-sekme-target]");
+  if (link) {
+    e.preventDefault();
 
-  console.log("Sol menü butonu:", targetId);
+    const targetId = link.dataset.sekmeTarget;
+    const internal = link.dataset.sekmeInternal || null;
 
-  // tüm içerikleri gizle
-  document.querySelectorAll(".content-box").forEach(el => {
-    el.classList.add("gizli");
-  });
+    console.log("Menü tıklandı:", targetId, internal);
 
-  // seçilen içeriği göster
-  const targetEl = document.getElementById(targetId);
-  if (targetEl) {
-    targetEl.classList.remove("gizli");
+    // TÜM ANA İÇERİKLERİ GİZLE
+    document.querySelectorAll(".content-box").forEach(box => {
+      box.classList.add("gizli");
+    });
+
+    // SEÇİLEN ANA İÇERİĞİ GÖSTER
+    const targetBox = document.getElementById(targetId);
+    if (targetBox) {
+      targetBox.classList.remove("gizli");
+    }
+
+    // HİSSE DETAY ALT SEKMELERİ
+    if (internal) {
+      document.querySelectorAll(".hisse-detay-sekme").forEach(el => {
+        el.classList.add("gizli");
+      });
+
+      const internalEl = document.getElementById(internal);
+      if (internalEl) {
+        internalEl.classList.remove("gizli");
+      }
+    }
+
+    // AKTİF MENÜ CLASS
+    document.querySelectorAll(".sol-menü a, .alt-menü a").forEach(a => {
+      a.classList.remove("aktif-sol-menü");
+    });
+    link.classList.add("aktif-sol-menü");
+
+    return;
+  }
+
+  // ==========================
+  // 2) FİNANSAL VERİLER AÇ / KAPA
+  // ==========================
+  const toggle = e.target.closest(".toggle-menu");
+  if (toggle) {
+    const submenu = document.getElementById(toggle.dataset.target);
+    if (submenu) {
+      submenu.classList.toggle("gizli");
+    }
   }
 });
 
 // ==========================
-// 2) ARAMA KUTUSU (TEST)
-// ==========================
-const searchForm = document.querySelector(".arama-kutusu");
-const searchInput = searchForm?.querySelector("input");
-
-if (searchForm && searchInput) {
-  searchForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    const hisse = searchInput.value.trim().toUpperCase();
-    if (!hisse) return;
-    console.log("Aranan hisse:", hisse);
-    alert("Arama çalışıyor: " + hisse);
-  });
-} else {
-  console.warn("Arama formu bulunamadı");
-}
-
-// ==========================
-// 3) JSON VERİ TESTİ (MANUEL)
+// 3) TEST AMAÇLI JSON VERİ ÇEKME
 // ==========================
 async function loadTestJSON() {
-  const url = "https://raw.githubusercontent.com/murat6492/my-fin-data/gh-pages/data/ASELS%20(TRY)__bilan%C3%A7o.json";
+  const url =
+    "https://raw.githubusercontent.com/murat6492/my-fin-data/gh-pages/data/ASELS%20(TRY)__bilan%C3%A7o.json";
+
   try {
     const res = await fetch(url);
     const data = await res.json();
-    console.log("JSON başarıyla alındı", data);
+    console.log("JSON başarıyla alındı:", data);
   } catch (err) {
-    console.error("JSON alınamadı", err);
+    console.error("JSON alınamadı:", err);
   }
 }
 
-window.loadTestJSON = loadTestJSON;
+// SAYFA YÜKLENİNCE TEST ÇALIŞSIN
+loadTestJSON();
