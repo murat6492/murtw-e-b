@@ -504,41 +504,4 @@ searchButton.addEventListener('click', () => {
             // Sonraki adımda tablo ve grafiklere aktaracağız
         })
 
-        /* ---------- Gelişmiş filename tahmini ---------- */
-function normalizeTickerForFiles(raw){
-  // bazı JSON isimlendirmelerinde " (TRY)" olabiliyor; normalize edip denemeler yapacağız
-  raw = raw.trim();
-  const attempts = [];
-  const plain = raw;
-  const withTry = raw.includes('(TRY)') ? raw : (raw + ' (TRY)');
-  attempts.push(plain);
-  attempts.push(withTry);
-
-  // bazı kullanıcılar ticker sadece ASELS yazıyor; JSON dosyalarında büyük/küçük duyarlılık olabilir
-  return Array.from(new Set(attempts)); // unique
-}
-
-function guessFilenames(ticker){
-  // ticker örnek: "ASELS" veya "ASELS (TRY)"
-  const bases = normalizeTickerForFiles(ticker);
-  const suffixes = [
-    '__bilanço.json',
-    '__bilanço.json', // duplicate safe
-    '__gelir_tablosu__yıllıklan_.json',
-    '__gelir_tablosu__çeyreklik_.json',
-    '__gelir_tablosu__dönemsel_.json',
-    '__nakit_akış__yıllıklan_.json',
-    '__nakit_akış__çeyreklik_.json',
-    '__nakit_akış__dönemsel_.json',
-    '__sayfa1.json',
-    '__income.json',
-    '__cashflow.json',
-    '__balance.json',
-    '.json' // fallback: ticker.json
-  ];
-  const guesses = [];
-  bases.forEach(b => suffixes.forEach(s => guesses.push(b + s)));
-  return guesses;
-}
-
-
+       
