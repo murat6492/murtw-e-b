@@ -75,5 +75,36 @@ async function loadTestJSON() {
   }
 }
 
+// ==========================
+// 3) HİSSE DETAY SEKME MENÜSÜ
+// ==========================
+document.querySelectorAll(".sekme-baslik").forEach(sekme => {
+  sekme.addEventListener("click", function () {
+    const target = this.dataset.sekme;
+
+    console.log("Sekme tıklandı:", target);
+
+    // başlık aktif class
+    document.querySelectorAll(".sekme-baslik").forEach(s => {
+      s.classList.remove("aktif");
+    });
+    this.classList.add("aktif");
+
+    // tüm sekme içeriklerini gizle
+    document.querySelectorAll(".sekme-icerik").forEach(box => {
+      box.classList.add("gizli");
+    });
+
+    // hedef içeriği aç
+    const targetBox = document.getElementById(target);
+    if (targetBox) {
+      targetBox.classList.remove("gizli");
+    } else {
+      console.warn("Sekme içeriği bulunamadı:", target);
+    }
+  });
+});
+
+
 // SAYFA YÜKLENİNCE TEST ÇALIŞSIN
 loadTestJSON();
