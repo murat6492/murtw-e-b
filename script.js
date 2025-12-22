@@ -80,47 +80,32 @@ function hideAllContent() {
   });
 }
 
+
 // ==========================
 // 3) HİSSE DETAY SEKME MENÜSÜ
 // ==========================
 document.querySelectorAll(".sekme-baslik").forEach(sekme => {
   sekme.addEventListener("click", function () {
     const target = this.dataset.sekme;
+
 // SOL MENÜ TIKLAMA
 document.addEventListener("click", function (e) {
   const link = e.target.closest("a[data-target]");
   if (!link) return;
 
-    console.log("Sekme tıklandı:", target);
   e.preventDefault();
 
-    // başlık aktif class
-    document.querySelectorAll(".sekme-baslik").forEach(s => {
-      s.classList.remove("aktif");
-    });
-    this.classList.add("aktif");
   const targetId = link.dataset.target;
   console.log("Menü tıklandı →", targetId);
 
-    // tüm sekme içeriklerini gizle
-    document.querySelectorAll(".sekme-icerik").forEach(box => {
-      box.classList.add("gizli");
-    });
   hideAllContent();
 
-    // hedef içeriği aç
-    const targetBox = document.getElementById(target);
-    if (targetBox) {
-      targetBox.classList.remove("gizli");
-    } else {
-      console.warn("Sekme içeriği bulunamadı:", target);
-    }
-  });
   const target = document.getElementById(targetId);
   if (target) {
     target.classList.remove("gizli");
   }
 });
+    
 
 
 // SAYFA YÜKLENİNCE TEST ÇALIŞSIN
