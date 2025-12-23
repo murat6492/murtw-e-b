@@ -38,3 +38,19 @@ window.addEventListener("DOMContentLoaded", () => {
     console.log("Anasayfa açıldı");
   }
 });
+
+window.addEventListener("DOMContentLoaded", () => {
+  console.log("İlk yükleme kontrolü");
+
+  const anasayfa = document.getElementById("anasayfa-icerik");
+  if (!anasayfa) return;
+
+  // hepsini gizle
+  document.querySelectorAll(".content-box").forEach(box => {
+    box.classList.add("gizli");
+  });
+
+  // anasayfayı aç
+  anasayfa.classList.remove("gizli");
+});
+
