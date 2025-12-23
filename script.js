@@ -24,3 +24,17 @@ sekmeler.forEach(sekme => {
     }
   });
 });
+
+// ===============================
+// İLK YÜKLEMEDE ANASAYFA AÇ
+// ===============================
+window.addEventListener("DOMContentLoaded", () => {
+  const anasayfa = document.getElementById("anasayfa-icerik");
+  if (anasayfa) {
+    document.querySelectorAll(".content-box").forEach(box =>
+      box.classList.add("gizli")
+    );
+    anasayfa.classList.remove("gizli");
+    console.log("Anasayfa açıldı");
+  }
+});
