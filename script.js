@@ -1,40 +1,52 @@
-console.log("Sekme sistemi yüklendi");
+console.log("script.js yüklendi");
 
-// ORTA SEKMELER
-document.querySelectorAll(".sekme-baslik").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const hedef = btn.dataset.sekme;
+// ===============================
+// SOL MENÜ – SAYFA GEÇİŞLERİ
+// ===============================
+document.querySelectorAll("[data-sekme-target]").forEach(link => {
+  link.addEventListener("click", e => {
+    e.preventDefault();
 
-    // başlıkları pasif yap
-    document.querySelectorAll(".sekme-baslik").forEach(b =>
-      b.classList.remove("aktif")
-    );
-    btn.classList.add("aktif");
+    const hedef = link.dataset.sekmeTarget;
+    console.log("Sol menü tıklandı:", hedef);
 
-    // içerikleri gizle
-    document.querySelectorAll(".sekme-icerik").forEach(icerik =>
-      icerik.classList.add("gizli")
-    );
+    document.querySelectorAll(".content-box").forEach(box => {
+      box.classList.add("gizli");
+    });
 
-    // hedef içeriği aç
-    const aktifIcerik = document.getElementById(hedef);
-    if (aktifIcerik) {
-      aktifIcerik.classList.remove("gizli");
+    const hedefEl = document.getElementById(hedef);
+    if (hedefEl) {
+      hedefEl.classList.remove("gizli");
     } else {
-      console.warn("İçerik bulunamadı:", hedef);
+      console.warn("Bulunamayan içerik:", hedef);
     }
   });
 });
 
-document.querySelectorAll("[data-sekme-target]").forEach(link => {
-  link.addEventListener("click", e => {
-    e.preventDefault();
-    const hedef = link.dataset.sekmeTarget;
+// ===============================
+// ORTA SEKMELER (Özet / Analiz / Değerleme)
+// ===============================
+document.querySelectorAll(".sekme-baslik").forEach(sekme => {
+  sekme.addEventListener("click", () => {
+    const hedef = sekme.dataset.sekme;
+    console.log("Sekme tıklandı:", hedef);
 
-    document.querySelectorAll(".content-box").forEach(box =>
-      box.classList.add("gizli")
+    document.querySelectorAll(".sekme-baslik").forEach(s =>
+      s.classList.remove("aktif")
+    );
+    sekme.classList.add("aktif");
+
+    document.querySelectorAll(".sekme-icerik").forEach(icerik =>
+      icerik.classList.add("gizli")
     );
 
-    document.getElementById(hedef)?.classList.remove("gizli");
+    const hedefIcerik = document.getElementById(hedef + "-icerik");
+    if (hedefIcerik) {
+      hedefIcerik.classList.remove("gizli");
+    } else {
+      console.warn("Sekme içeriği yok:", hedef);
+    }
   });
 });
+
+console.log("Sekme sistemi yüklendi");
