@@ -1,47 +1,26 @@
-console.log("script.js yüklendi");
+console.log("Sekme sistemi yüklendi");
 
-// ===============================
-// SOL MENÜ – SAYFA GEÇİŞLERİ
-// ===============================
-document.querySelectorAll("[data-sekme-target]").forEach(link => {
-  link.addEventListener("click", e => {
-    e.preventDefault();
+const sekmeler = document.querySelectorAll(".sekme-baslik");
+const icerikler = document.querySelectorAll(".sekme-icerik");
 
-    const hedef = link.dataset.sekmeTarget;
-    console.log("Sol menü tıklandı:", hedef);
-
-    document.querySelectorAll(".content-box").forEach(box => {
-      box.classList.add("gizli");
-    });
-
-    const hedefEl = document.getElementById(hedef);
-    if (hedefEl) {
-      hedefEl.classList.remove("gizli");
-    }
-  });
-});
-
-// ===============================
-// ORTA SEKME SİSTEMİ
-// ===============================
-document.querySelectorAll(".sekme-baslik").forEach(sekme => {
+sekmeler.forEach(sekme => {
   sekme.addEventListener("click", () => {
     const hedef = sekme.dataset.sekme;
     console.log("Sekme tıklandı:", hedef);
 
-    document.querySelectorAll(".sekme-baslik")
-      .forEach(s => s.classList.remove("aktif"));
+    // başlıkları temizle
+    sekmeler.forEach(s => s.classList.remove("aktif"));
     sekme.classList.add("aktif");
 
-    document.querySelectorAll(".sekme-icerik")
-      .forEach(i => i.classList.add("gizli"));
+    // içerikleri gizle
+    icerikler.forEach(i => i.classList.add("gizli"));
 
+    // hedef içeriği aç
     const hedefIcerik = document.getElementById(hedef + "-icerik");
     if (hedefIcerik) {
       hedefIcerik.classList.remove("gizli");
+    } else {
+      console.warn("Sekme içeriği bulunamadı:", hedef);
     }
   });
 });
-
-console.log("Sekme sistemi yüklendi");
-
