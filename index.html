@@ -10,7 +10,6 @@
 </head>
 <body class="dark">
 
-
     <div class="sol-sutun">
         <div class="header-band">
               <button class="tema-buton" id="temaDegistir" title="Tema Değiştir">☀️</button>
@@ -40,10 +39,10 @@
   <h3 class="menu-baslik">Analiz</h3>
   <ul class="alt-menü">
     <li>
-      <a href="#" data-target="hisse-detay-icerik">Özet</a>
+      <a href="#" data-sekme-target="hisse-detay-icerik">Özet</a>
     </li>
     <li>
-      <a href="#" data-target="hisse-degerleme-icerik">Hisse Değerleme</a>
+      <a href="#" data-sekme-target="hisse-degerleme-icerik">Hisse Değerleme</a>
     </li>
   </ul>
 </div>
@@ -340,14 +339,10 @@
         <div class="sekme-baslik aktif" data-sekme="ozet">Özet</div>
         <div class="sekme-baslik" data-sekme="bistdata-analiz">BistData Analizi</div>
         <div class="sekme-baslik" data-sekme="finansal-veriler">Finansal Veriler</div>
-        <div class="sekme-baslik" data-sekme="bildirimler">Bildirimler</div>
-        <div class="sekme-baslik" data-sekme="geri-alim">Geri Alım</div>
-        <div class="sekme-baslik" data-sekme="is-iliskisi">İş İlişkisi</div>
         <div class="sekme-baslik" data-sekme="hisse-degerleme">Hisse Değerleme</div>
-        <div class="sekme-baslik" data-sekme="sirket-karnesi">Şirket Karnesi</div>
     </div>
     
-    <div id="ozet-icerik" class="sekme-icerik">
+    <div id="ozet" class="sekme-icerik">
 
         <div class="panel-row-tek">
             <div class="oranlar-panel">
@@ -480,7 +475,7 @@
         </div>
     </div>
 
-    <div id="hisse-degerleme-icerik" class="sekme-icerik gizli">
+    <div id="hisse-degerleme" class="sekme-icerik gizli">
         <div class="financial-table-container">
             <table class="financial-table" id="hisseTablosu">
                 <thead>
@@ -713,7 +708,7 @@
         </div>
     </div>
   
-    <div id="bistdata-analiz-icerik" class="sekme-icerik gizli">
+    <div id="bistdata-analiz" class="sekme-icerik gizli">
       
         <div class="panel-row-tek">
             <div class="grafik-panel">
@@ -990,10 +985,10 @@
         </div>
     </div>
 
-    <div id="finansal-veriler-icerik" class="sekme-icerik gizli">Finansal Veriler İçeriği</div>
-    <div id="bildirimler-icerik" class="sekme-icerik gizli">Bildirimler İçeriği</div>
+    <div id="finansal-veriler" class="sekme-icerik gizli">Finansal Veriler İçeriği</div>
+    <div id="bildirimler" class="sekme-icerik gizli">Bildirimler İçeriği</div>
     
-    <div id="hisseler-icerik" class="content-box gizli">Hisseler Sayfası</div>
+    <div id="hisseler" class="content-box gizli">Hisseler Sayfası</div>
     <div id="izleme-listesi-icerik" class="content-box gizli">İzleme Listesi Sayfası</div>
     <div id="bilanco-icerik" class="content-box gizli">Bilanço Sayfası</div>
     <div id="gelir-tablosu-icerik" class="content-box gizli">Gelir Tablosu Sayfası</div>
@@ -1014,3 +1009,6 @@
     
 </body>
 </html>
+
+
+
