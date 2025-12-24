@@ -1055,3 +1055,65 @@ body.dark .panel-butonlar button,
 body.dark .panel-butonlar a {
     color: #a0a0c0;
 }
+
+/* ================================================
+   TELEFON YATAY MOD (LANDSCAPE) - PC GİBİ GÖRÜNÜM
+   ================================================ */
+
+/* Telefon yatay modda (genellikle 600-900px genişlik arası) */
+@media (min-width: 600px) and (max-width: 1024px) and (orientation: landscape) {
+
+    /* Sol menüyü göster ve sabitle */
+    .sol-sutun {
+        display: block !important;     /* Mobil'de gizliydi, yatayda göster */
+        position: fixed;
+        width: var(--sol-genislik);    /* 200px kalır */
+        height: 100vh;
+        overflow-y: auto;
+    }
+
+    /* Sağ içerik alanını sol boşluk bırakacak şekilde kaydır */
+    .ana-icerik-kapsayici {
+        padding-left: calc(var(--sol-genislik) + 20px) !important; /* Sol menü kadar boşluk */
+        padding-right: 20px;
+        padding-top: 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Reklam ve içeriklerin taşmasını engelle */
+    .ana-icerik {
+        max-width: none;
+    }
+
+    /* Sıralama listelerini yatayda 3 sütun tut (PC gibi) */
+    .siralama-listeleri {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Piyasa kutularını yatayda yan yana tut */
+    .piyasa-verileri-band {
+        flex-wrap: nowrap;
+    }
+
+    .piyasa-kutu {
+        min-width: 100px;
+    }
+
+    /* Hisse başlık alanı yatayda yan yana */
+    .hisse-baslik-alan {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .hisse-sag {
+        margin-left: 15px;
+        margin-top: 0;
+        max-width: 300px;
+    }
+
+    /* Panel row'ları 3 sütun */
+    .panel-row-tek {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
