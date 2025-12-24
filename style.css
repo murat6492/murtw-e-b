@@ -1163,3 +1163,86 @@ body.dark .panel-butonlar a {
 
     #mobilMenuAc.active + .sol-sutun { display: block; } /* Butona basınca göster */
 }
+
+/* MENÜ DARALT/GENİŞLET BUTONU */
+.menu-toggle-btn {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--ana-mavi);
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1em;
+    display: none; /* Mobilde görünür olacak */
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.menu-toggle-btn i {
+    transition: transform 0.3s;
+}
+
+/* Daraltılmış halde ok yönü ters */
+.sol-sutun.daraltilmis .menu-toggle-btn i {
+    transform: rotate(180deg);
+}
+
+/* MOBİL DİKEY VE YATAYDA BUTON GÖRÜNÜR */
+@media (max-width: 1024px) {
+    .menu-toggle-btn {
+        display: block !important;
+    }
+}
+
+/* MENÜ DARALTILMIŞ HAL */
+.sol-sutun.daraltilmis {
+    width: 70px !important; /* Sadece ikonlar sığsın */
+    transition: width 0.4s ease;
+}
+
+.sol-sutun.daraltilmis .logo-alani img {
+    width: 40px; /* Logo küçülsün */
+}
+
+.sol-sutun.daraltilmis .logo-alani h2,
+.sol-sutun.daraltilmis .arama-kutusu,
+.sol-sutun.daraltilmis .menu-baslik,
+.sol-sutun.daraltilmis .alt-menü a span,
+.sol-sutun.daraltilmis .sidebar-login-btn {
+    display: none !important;
+}
+
+.sol-sutun.daraltilmis .sol-menü a,
+.sol-sutun.daraltilmis .alt-menü a {
+    justify-content: center;
+    padding: 12px 0;
+    font-size: 0; /* Yazı gizle */
+}
+
+.sol-sutun.daraltilmis .sol-menü a i,
+.sol-sutun.daraltilmis .alt-menü a i {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+/* İçerik boşluğu otomatik ayarlanır */
+.ana-icerik-kapsayici {
+    transition: padding-left 0.4s ease;
+}
+
+@media (max-width: 1024px) {
+    .sol-sutun.daraltilmis ~ .ana-icerik-kapsayici {
+        padding-left: 90px !important; /* Dar menü + boşluk */
+    }
+}
+
+@media (min-width: 1025px) {
+    .sol-sutun.daraltilmis ~ .ana-icerik-kapsayici {
+        padding-left: 90px !important;
+    }
+}
