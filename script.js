@@ -448,3 +448,29 @@ if (mobilMenuBtn) {
         mobilMenuBtn.classList.toggle('active');
     });
 }
+
+// Menü Daralt/Genişlet + Durumu Hatırla
+document.addEventListener('DOMContentLoaded', () => {
+    const solSutun = document.querySelector('.sol-sutun');
+    const toggleBtn = document.getElementById('menuToggleBtn');
+    const anaIcerik = document.querySelector('.ana-icerik-kapsayici');
+
+    if (!toggleBtn || !solSutun) return;
+
+    // LocalStorage'dan son hali yükle
+    if (localStorage.getItem('menuDaraltilmis') === 'true') {
+        solSutun.classList.add('daraltilmis');
+        toggleBtn.querySelector('i').style.transform = 'rotate(180deg)';
+    }
+
+    // Tıklama olayı
+    toggleBtn.addEventListener('click', () => {
+        solSutun.classList.toggle('daraltilmis');
+
+        const dar = solSutun.classList.contains('daraltilmis');
+        localStorage.setItem('menuDaraltilmis', dar);
+
+        // Ok yönünü değiştir
+        toggleBtn.querySelector('i').style.transform = dar ? 'rotate(180deg)' : 'rotate(0deg)';
+    });
+});
