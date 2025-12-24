@@ -1201,12 +1201,12 @@ body.dark .panel-butonlar a {
 
 /* MENÜ DARALTILMIŞ HAL */
 .sol-sutun.daraltilmis {
-    width: 70px !important; /* Sadece ikonlar sığsın */
+    width: 35px !important; /* Sadece ikonlar sığsın */
     transition: width 0.4s ease;
 }
 
 .sol-sutun.daraltilmis .logo-alani img {
-    width: 40px; /* Logo küçülsün */
+    width: 25px; /* Logo küçülsün */
 }
 
 .sol-sutun.daraltilmis .logo-alani h2,
@@ -1237,7 +1237,7 @@ body.dark .panel-butonlar a {
 
 @media (max-width: 1024px) {
     .sol-sutun.daraltilmis ~ .ana-icerik-kapsayici {
-        padding-left: 90px !important; /* Dar menü + boşluk */
+        padding-left: 40px !important; /* Dar menü + boşluk */
     }
 }
 
