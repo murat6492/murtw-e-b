@@ -1243,6 +1243,6 @@ body.dark .panel-butonlar a {
 
 @media (min-width: 1025px) {
     .sol-sutun.daraltilmis ~ .ana-icerik-kapsayici {
-        padding-left: 90px !important;
+        padding-left: 40px !important;
     }
 }
