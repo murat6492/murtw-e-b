@@ -440,3 +440,11 @@ searchButton.addEventListener('click', () => {
             console.error("Fetch hatası:", err);
         });
 });
+
+const mobilMenuBtn = document.getElementById('mobilMenuAc');
+if (mobilMenuBtn) {
+    mobilMenuBtn.addEventListener('click', () => {
+        document.querySelector('.sol-sutun').classList.toggle('gizli');
+        mobilMenuBtn.classList.toggle('active');
+    });
+}
