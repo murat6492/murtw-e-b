@@ -569,45 +569,83 @@ body {
     .oranlar-panel:nth-child(3) { grid-column: span 2; } 
 }
 
+/* MOBİL DİKEY - Sol menü üstte akışta (gizli değil), içerik tam genişlik */
 @media (max-width: 900px) {
-    :root { --sol-genislik: 100%; --sag-genislik: 100%; }
-    /* DEĞİŞTİ: Mobil görünümde de üst boşluk kaldırıldı */
-    body { flex-direction: column; padding-top: 0; }
-    .header-band { position: relative; width: 100%; }
-    .sol-sutun, .sag-sutun { 
-        position: relative; 
-        width: 100%; 
-        height: auto; 
-        border-right: none; 
-        border-left: none; 
-        top: 0; 
+    :root { 
+        --sol-genislik: 100%; /* Tam genişlik */
     }
-    /* MOBİL DÜZELTME: Mobil cihazlarda padding 10px olarak ayarlandı. */
-    .ana-icerik-kapsayici { 
-        margin: 0; 
-        width: 100% !important; 
-        padding: 10px; /* Sadece 10px yatay ve dikey padding */
-        padding-left: 10px; 
-        padding-right: 10px; 
+
+    body {
+        flex-direction: column; /* Zaten var */
     }
-    
+
+    .sol-sutun {
+        position: relative !important; /* Fixed değil, üstte akışta */
+        width: 100% !important;
+        height: auto !important;
+        border-right: none;
+        display: block !important; /* Gizli kalmasın, üstte görünsün */
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--hisse-border); /* Ayrım için */
+        overflow-y: visible;
+    }
+
+    .ana-icerik-kapsayici {
+        padding-left: 10px !important; /* Sol boşluk yok */
+        padding-right: 10px !important;
+        padding-top: 10px;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    /* Diğer mobil ayarlar (zaten var) */
     .hisse-baslik-alan { flex-direction: column; }
-    .hisse-sag { 
-        width: 100%; 
-        grid-template-columns: 1fr; /* Mobil'de tek sütun (4x1) */
-        margin-top: 5px; 
-        margin-left: 0; 
-        max-width: 100%;
-        
-        /* Mobil'de kesinlikle tek sütun: */
-        display: flex;
-        flex-direction: column;
+    .panel-row-tek { grid-template-columns: 1fr; }
+    .siralama-listeleri { grid-template-columns: 1fr; }
+    .piyasa-verileri-band { flex-wrap: wrap; }
+}
+
+/* MOBİL YATAY (LANDSCAPE) - MASAÜSTÜ GİBİ GÖRÜNÜM */
+@media (max-width: 1024px) and (orientation: landscape) {
+    :root { 
+        --sol-genislik: 220px; /* Biraz daha geniş, yatayda rahat olsun */
     }
-    .fiyat { font-size: 2.5em; }
-    .panel-row { grid-template-columns: 1fr; gap: 10px; }
-    .oranlar-panel:nth-child(3) { grid-column: span 1; }
-    
-    .sol-sutun { display: none; }
+
+    .sol-sutun {
+        position: fixed !important;
+        width: var(--sol-genislik) !important;
+        height: 100vh !important;
+        display: block !important;
+        overflow-y: auto;
+    }
+
+    .ana-icerik-kapsayici {
+        padding-left: calc(var(--sol-genislik) + 30px) !important; /* Sol menü + ekstra boşluk */
+        padding-right: 20px !important;
+        padding-top: 20px;
+    }
+
+    /* İçeriklerin yatayda PC gibi davranması */
+    .siralama-listeleri {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .piyasa-verileri-band {
+        flex-wrap: nowrap;
+    }
+
+    .panel-row-tek {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .hisse-baslik-alan {
+        flex-direction: row;
+    }
+
+    .hisse-sag {
+        margin-left: 15px;
+        margin-top: 0;
+    }
 }
 /* ================================================= */
 /* YENİ ANASAYFA STİLLERİ (Ekran Görüntüsü 289) */
@@ -1116,4 +1154,12 @@ body.dark .panel-butonlar a {
     .panel-row-tek {
         grid-template-columns: repeat(3, 1fr);
     }
+}
+
+@media (max-width: 900px) {
+    #mobilMenuAc { display: block !important; }
+
+    .sol-sutun { display: none; } /* Gizli tut */
+
+    #mobilMenuAc.active + .sol-sutun { display: block; } /* Butona basınca göster */
 }
