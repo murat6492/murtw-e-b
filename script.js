@@ -1,7 +1,7 @@
-// script.js
+// script.js - DÜZELTİLMİŞ VE TEST EDİLMİŞ VERSİYON
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Sol Menü - Sekme Geçişleri
+    // 1. Sol Menü Sekme Geçişleri
     const solMenuLinkler = document.querySelectorAll('.sol-menü a, .alt-menü a');
     const tumIcerikler = document.querySelectorAll('.content-box');
 
@@ -9,117 +9,122 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
 
-            // Tüm içerikleri gizle
-            tumIcerikler.forEach(icerik => {
-                icerik.classList.add('gizli');
-            });
+            const targetId = link.getAttribute('data-sekme-target');
+            if (!targetId) return;
 
-            // Aktif sınıfını kaldır
+            // Tüm içerikleri gizle
+            tumIcerikler.forEach(icerik => icerik.classList.add('gizli'));
+
+            // Tıklanan içeriği göster
+            const target = document.getElementById(targetId);
+            if (target) {
+                target.classList.remove('gizli');
+            }
+
+            // Aktif menüyü güncelle
             document.querySelectorAll('.sol-menü a, .alt-menü a').forEach(a => {
                 a.classList.remove('aktif-sol-menü');
             });
-
-            // Tıklanan hedefi göster
-            const targetId = link.getAttribute('data-sekme-target');
-            const targetIcerik = document.getElementById(targetId);
-            if (targetIcerik) {
-                targetIcerik.classList.remove('gizli');
-            }
-
-            // Aktif menüye sınıf ekle
             link.classList.add('aktif-sol-menü');
         });
     });
 
-    // 2. Hisse İnceleme Sayfasındaki Sekmeler (Özet, BistData vs.)
+    // 2. Hisse İnceleme İçindeki Sekmeler (Özet, BistData, Finansal, Değerleme)
     const sekmeBasliklar = document.querySelectorAll('.sekme-menü .sekme-baslik');
-    const sekmeIcerikler = document.querySelectorAll('#hisse-inceleme-sayfa .sekme-icerik');
 
     sekmeBasliklar.forEach(baslik => {
         baslik.addEventListener('click', () => {
-            const hedefSekme = baslik.getAttribute('data-sekme');
+            const sekmeAdi = baslik.getAttribute('data-sekme');
 
-            // Tüm içerikleri gizle ve aktif sınıfı kaldır
-            sekmeIcerikler.forEach(ic => ic.classList.add('gizli'));
+            // Tüm sekme içeriklerini gizle
+            document.querySelectorAll('#hisse-inceleme-sayfa .sekme-icerik').forEach(ic => {
+                ic.classList.add('gizli');
+            });
+
+            // Tüm başlıkların aktif sınıfını kaldır
             sekmeBasliklar.forEach(b => b.classList.remove('aktif'));
 
-            // Hedefi göster
-            const hedefIcerik = document.getElementById(hedefSekme + '-sekme-icerik');
+            // Hedef içeriği göster
+            const hedefIcerik = document.getElementById(sekmeAdi + '-sekme-icerik');
             if (hedefIcerik) {
                 hedefIcerik.classList.remove('gizli');
             }
 
+            // Tıklanan başlığa aktif sınıfı ekle
             baslik.classList.add('aktif');
         });
     });
 
-    // 3. Tema Değiştirme Butonu (Karanlık / Aydınlık)
+    // 3. Tema Değiştirme
     const temaButon = document.getElementById('temaDegistir');
-    temaButon.addEventListener('click', () => {
-        document.body.classList.toggle('dark');
-        document.body.classList.toggle('light');
+    if (temaButon) {
+        temaButon.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            document.body.classList.toggle('light');
 
-        // Buton ikonunu değiştir
-        if (document.body.classList.contains('dark')) {
-            temaButon.textContent = '☀️';
-        } else {
-            temaButon.textContent = '🌙';
-        }
-    });
-
-    // Varsayılan tema kontrolü (eğer light class yoksa dark kalır)
-    if (!document.body.classList.contains('light')) {
-        document.body.classList.add('dark');
-        temaButon.textContent = '☀️';
+            if (document.body.classList.contains('dark')) {
+                temaButon.textContent = '☀️';
+            } else {
+                temaButon.textContent = '🌙';
+            }
+        });
     }
 
-    // 4. Arama Kutusu (Basit simülasyon - gerçek veri yok ama hisse incelemeye yönlendirir)
+    // Varsayılan tema: dark
+    if (!document.body.classList.contains('light') && !document.body.classList.contains('dark')) {
+        document.body.classList.add('dark');
+        if (temaButon) temaButon.textContent = '☀️';
+    }
+
+    // 4. Arama Kutusu (ASELS yazınca hisse sayfasına gider)
     const hisseInput = document.getElementById('hisseInput');
     const hisseAraBtn = document.getElementById('hisseAraBtn');
 
     const aramaYap = () => {
-        const kod = hisseInput.value.trim().toUpperCase();
-        if (kod) {
-            // Örnek: ASELS yazınca Hisse İnceleme sayfasına gider
-            if (kod === 'ASELS' || kod === 'asels') {
-                // Hisse başlığını güncelle
-                document.querySelector('.hisse-kodu').textContent = kod;
-                document.querySelector('.hisse-ad').textContent = `${kod} Şirket Adı Burada Görünecek`;
+        let kod = hisseInput.value.trim().toUpperCase();
+        if (!kod) return;
 
-                // Hisse İnceleme sayfasını aç
-                tumIcerikler.forEach(icerik => icerik.classList.add('gizli'));
-                document.getElementById('hisse-inceleme-sayfa').classList.remove('gizli');
+        // Demo: Sadece ASELS çalışsın
+        if (kod === 'ASELS') {
+            // Hisse başlığını güncelle
+            const hisseKoduEl = document.querySelector('.hisse-kodu');
+            const hisseAdEl = document.querySelector('.hisse-ad');
+            if (hisseKoduEl) hisseKoduEl.textContent = 'ASELS';
+            if (hisseAdEl) hisseAdEl.textContent = 'ASELSAN Elektronik Sanayi ve Ticaret A.Ş.';
 
-                // Sol menüden Hisse İnceleme'yi aktif et
-                document.querySelectorAll('.sol-menü a, .alt-menü a').forEach(a => a.classList.remove('aktif-sol-menü'));
-                document.querySelector('a[data-sekme-target="hisse-inceleme-sayfa"]').classList.add('aktif-sol-menü');
+            // Hisse İnceleme sayfasını aç
+            tumIcerikler.forEach(icerik => icerik.classList.add('gizli'));
+            const hisseSayfa = document.getElementById('hisse-inceleme-sayfa');
+            if (hisseSayfa) hisseSayfa.classList.remove('gizli');
 
-                hisseInput.value = '';
-            } else {
-                alert(`"${kod}" kodu bulunamadı. Örnek kullanım: ASELS`);
-            }
+            // Sol menüde Hisse İnceleme'yi aktif et
+            document.querySelectorAll('.sol-menü a, .alt-menü a').forEach(a => a.classList.remove('aktif-sol-menü'));
+            const hisseLink = document.querySelector('a[data-sekme-target="hisse-inceleme-sayfa"]');
+            if (hisseLink) hisseLink.classList.add('aktif-sol-menü');
+
+            hisseInput.value = '';
+        } else {
+            alert(`"${kod}" hissesi bulunamadı. Denemek için: ASELS`);
         }
     };
 
-    hisseAraBtn.addEventListener('click', aramaYap);
-    hisseInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            aramaYap();
-        }
-    });
+    if (hisseAraBtn) hisseAraBtn.addEventListener('click', aramaYap);
+    if (hisseInput) {
+        hisseInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') aramaYap();
+        });
+    }
 
-    // 5. Bilgi Butonları (ℹ️) - Toggle ile bilgi notu göster/gizle
-    const infoButonlar = document.querySelectorAll('.info-btn');
-    infoButonlar.forEach(btn => {
+    // 5. Bilgi Butonları (ℹ️)
+    document.querySelectorAll('.info-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            const targetId = btn.getAttribute('data-info-target');
-            const not = document.getElementById(targetId);
-            if (not) {
-                not.classList.toggle('gizli');
-            }
+            const target = btn.getAttribute('data-info-target');
+            const not = document.getElementById(target);
+            if (not) not.classList.toggle('gizli');
         });
     });
 
-    // Sayfa yüklendiğinde varsayılan olarak Anasayfa aktif olsun
-    document.querySelector('a[data-sekme-target="anasayfa-icerik"]').classList.add('aktif-sol-menü');
+    // Sayfa açıldığında Anasayfa aktif olsun
+    const anasayfaLink = document.querySelector('a[data-sekme-target="anasayfa-icerik"]');
+    if (anasayfaLink) anasayfaLink.classList.add('aktif-sol-menü');
 });
