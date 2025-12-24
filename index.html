@@ -10,6 +10,7 @@
 </head>
 <body class="dark">
 
+
     <div class="sol-sutun">
         <div class="header-band">
               <button class="tema-buton" id="temaDegistir" title="Tema Değiştir">☀️</button>
@@ -22,7 +23,7 @@
     
 </div>
         
-       <form class="arama-kutusu" onsubmit="return false;">
+        <form class="arama-kutusu" onsubmit="return false;">
     <input id="hisseInput" type="text" placeholder="Ara..." required>
     <button id="hisseAraBtn" type="submit"><i class="fas fa-search"></i></button>
 </form>
@@ -36,17 +37,20 @@
         </ul>
         
         <div class="alt-menü-kapsayici">
-  <h3 class="menu-baslik">Analiz</h3>
-  <ul class="alt-menü">
-    <li>
-     <a href="#" data-sekme-target="hisse-inceleme-sayfa">Hisse İnceleme</a>
-    </li>
-    <li>
-      <a href="#" data-sekme-target="hesaplama-modulu-sayfa">Hesaplama Modülü</a>
-    </li>
-  </ul>
-</div>
-
+            <h3 class="menu-baslik">Analiz</h3>
+            <ul class="alt-menü">
+                <li><a href="#" class="menu-link" data-sekme-target="hisse-detay-icerik" data-sekme-internal="ozet">Özet</a></li>
+                <li><a href="#" class="menu-link" data-sekme-target="hisse-detay-icerik" data-sekme-internal="bistdata-analiz">BistData Analiz</a></li>
+                <li><a href="#" class="menu-link" data-sekme-target="hisse-detay-icerik" data-sekme-internal="hisse-degerleme-icerik">Hisse Değerleme</a></li>
+                <li><span class="toggle-menu" data-target="mali-menu">Finansal Veriler</span>
+                    <ul id="mali-menu" class="sub-menu gizli"> <li><a href="#" data-sekme-target="hisse-detay-icerik" data-sekme-internal="bilanco">Bilanço</a></li>
+                        <li><a href="#" data-sekme-target="hisse-detay-icerik" data-sekme-internal="gelir-tablosu">Gelir Tablosu</a></li>
+                        <li><a href="#" data-sekme-target="hisse-detay-icerik" data-sekme-internal="nakit-akis">Nakit Akış</a></li>
+                    </ul>
+                </li>
+                </ul>
+        </div>
+        
         
         <div class="alt-menü-kapsayici">
             <h3 class="menu-baslik">Hisse Detay</h3>
@@ -57,12 +61,19 @@
                 <li><a href="#" data-sekme-target="halka-arz-icerik">Halka Arz</a></li>
                 <li><a href="#" data-sekme-target="finansal-okur-icerik">Finansal Okur-</a></li>
                 <div class="sidebar-login-box">
-                     <button class="sidebar-login-btn">Giriş / Kayıt Ol</button> </div>
-              
-           </div>
+                     <button class="sidebar-login-btn">Giriş / Kayıt Ol</button>
+</div>
+            </ul>
+        </div>
+    </div>
 
-       <div class="ana-icerik-kapsayici">
-             <div class="ana-icerik">
+    <div class="ana-icerik-kapsayici">
+        <div class="ana-icerik">
+
+            <div class="reklam-alani ust">reklam alanı</div>
+            
+
+            <div id="anasayfa-icerik" class="content-box">
                 <div class="piyasa-verileri-band">
                     <div class="piyasa-kutu">
                         <span class="piyasa-baslik">BIST 30</span>
@@ -296,9 +307,11 @@
                         <h3 class="kap-baslik">Kap Bildirimleri</h3>
                     </div>
                 </div>
+
             </div>
 
-    <div id="hisse-inceleme-sayfa" class="content-box gizli">
+            <div id="hisse-detay-icerik" class="content-box gizli">
+    
     <div class="hisse-baslik-alan">
         <div class="hisse-sol">
             <h1 class="hisse-kodu">Asels</h1>
@@ -308,7 +321,6 @@
                 <span class="yuzde artti">+3.55</span>
             </div>
         </div>
-    </div>
 
         <div class="tekli-panel-listesi">
             <div class="ozet-bilgi-panel">
@@ -326,16 +338,18 @@
         </div>
     </div>
 
-  
-
-     <div class="sekme-menü">
-    <div class="sekme-baslik aktif" data-sekme="ozet">Özet</div>
-    <div class="sekme-baslik" data-sekme="bistdata">BistData Analizi</div>
-    <div class="sekme-baslik" data-sekme="finansal">Finansal Veriler</div>
-    <div class="sekme-baslik" data-sekme="degerleme">Hisse Değerleme</div>
-  </div>   
+    <div class="sekme-menü">
+        <div class="sekme-baslik aktif" data-sekme="ozet">Özet</div>
+        <div class="sekme-baslik" data-sekme="bistdata-analiz">BistData Analizi</div>
+        <div class="sekme-baslik" data-sekme="finansal-veriler">Finansal Veriler</div>
+        <div class="sekme-baslik" data-sekme="bildirimler">Bildirimler</div>
+        <div class="sekme-baslik" data-sekme="geri-alim">Geri Alım</div>
+        <div class="sekme-baslik" data-sekme="is-iliskisi">İş İlişkisi</div>
+        <div class="sekme-baslik" data-sekme="hisse-degerleme">Hisse Değerleme</div>
+        <div class="sekme-baslik" data-sekme="sirket-karnesi">Şirket Karnesi</div>
+    </div>
     
-        <div id="ozet-sekme-icerik" class="sekme-icerik">
+    <div id="ozet-icerik" class="sekme-icerik">
 
         <div class="panel-row-tek">
             <div class="oranlar-panel">
@@ -467,8 +481,8 @@
             </div>
         </div>
     </div>
-                
-        <div id="degerleme-sekme-icerik" class="sekme-icerik gizli">   
+
+    <div id="hisse-degerleme-icerik" class="sekme-icerik gizli">
         <div class="financial-table-container">
             <table class="financial-table" id="hisseTablosu">
                 <thead>
@@ -701,7 +715,8 @@
         </div>
     </div>
   
-    <div id="bistdata-sekme-icerik" class="sekme-icerik gizli">
+    <div id="bistdata-analiz-icerik" class="sekme-icerik gizli">
+      
         <div class="panel-row-tek">
             <div class="grafik-panel">
                 <h3 class="panel-baslik">Satışlar</h3>
@@ -890,7 +905,8 @@
                 </div>
             </div>
         </div> 
-        
+    
+
         <div class="panel-row-tek" style="margin-top: 20px;">
     
     <div class="grafik-panel">
@@ -970,11 +986,10 @@
         </div>
     </div>
 
-    <div id="finansal-sekme-icerik" class="sekme-icerik gizli">  
-    <div id="finansal-veriler" class="sekme-icerik gizli">Finansal Veriler İçeriği</div>
-   
-    <div id="hesaplama-modulu-sayfa" class="content-box gizli"></div>       
-    <div id="hisseler" class="content-box gizli">Hisseler Sayfası</div>
+    <div id="finansal-veriler-icerik" class="sekme-icerik gizli">Finansal Veriler İçeriği</div>
+    <div id="bildirimler-icerik" class="sekme-icerik gizli">Bildirimler İçeriği</div>
+    
+    <div id="hisseler-icerik" class="content-box gizli">Hisseler Sayfası</div>
     <div id="izleme-listesi-icerik" class="content-box gizli">İzleme Listesi Sayfası</div>
     <div id="bilanco-icerik" class="content-box gizli">Bilanço Sayfası</div>
     <div id="gelir-tablosu-icerik" class="content-box gizli">Gelir Tablosu Sayfası</div>
@@ -987,6 +1002,7 @@
     <div id="hakkimizda-icerik" class="content-box gizli">Hakkımızda Sayfası</div>
     <div id="yasal-uyari-icerik" class="content-box gizli">Yasal Uyarı Sayfası</div>
     <div id="geri-alim-icerik" class="content-box gizli">Geri Alım Sayfası</div>
+    <div id="bildirimler-icerik" class="content-box gizli">Bildirimler Sayfası</div>
 
 </div>
     </div>
@@ -994,6 +1010,3 @@
     
 </body>
 </html>
-
-
-
