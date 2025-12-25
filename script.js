@@ -1,5 +1,12 @@
-document.addEventListener('DOMContentLoaded', () => {
-    
+  document.addEventListener("DOMContentLoaded", () => {
+  const el = document.getElementById("hisse-detay-icerik");
+  if (!el) {
+    console.error("hisse-detay-icerik bulunamadı");
+    return;
+  }
+  // varsayılan olarak gizli kalsın, otomatik açılmasın
+});
+ 
     /* ================================================= */
     /* 1. TEMA DEĞİŞTİRME İŞLEVİ */
     /* ================================================= */
