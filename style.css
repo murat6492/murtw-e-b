@@ -661,8 +661,9 @@ body {
 
 /* Üst Piyasa Kutuları Bandı */
 .piyasa-verileri-band {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     gap: 10px;
     margin-bottom: 25px;
 }
@@ -702,6 +703,7 @@ body {
 
 /* Orta Sıralama Listeleri */
 .siralama-listeleri {
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
