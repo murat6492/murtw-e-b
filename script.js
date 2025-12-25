@@ -475,3 +475,50 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleBtn.querySelector('i').style.transform = dar ? 'rotate(180deg)' : 'rotate(0deg)';
     });
 });
+
+// ===============================
+// HİSSE ARAMA + JSON ÇEKME
+// ===============================
+const hisseInput = document.getElementById("hisseInput");
+
+async function hisseYukle(hisseKodu) {
+  const kod = hisseKodu.toUpperCase();
+
+  const url = `https://raw.githubusercontent.com/murat6492/my-fin-data/gh-pages/data/${kod}%20(TRY)__bilan%C3%A7o.json`;
+  console.log("JSON isteniyor:", url);
+
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("Dosya bulunamadı");
+
+    const data = await res.json();
+    console.log("JSON başarıyla alındı:", data);
+
+    // içerikleri gizle
+    document.querySelectorAll(".content-box").forEach(b =>
+      b.classList.add("gizli")
+    );
+
+    // hisse sayfasını aç
+    const hedef = document.getElementById("hisse-inceleme-sayfa");
+    if (hedef) hedef.classList.remove("gizli");
+
+    // başlık güncelle
+    const kodEl = document.querySelector(".hisse-kodu");
+    if (kodEl) kodEl.textContent = kod;
+
+  } catch (err) {
+    console.error(err);
+    alert("Bu hisse için veri bulunamadı");
+  }
+}
+
+// FORM SUBMIT YAKALAMA
+document.querySelector(".arama-kutusu").addEventListener("submit", e => {
+  e.preventDefault();
+  const deger = hisseInput.value.trim();
+  if (!deger) return;
+
+  hisseYukle(deger);
+});
+
