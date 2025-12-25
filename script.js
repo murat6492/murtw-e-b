@@ -121,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetMenu = document.getElementById(span.dataset.target);
             if (targetMenu) {
                 targetMenu.classList.toggle('gizli');
+                toggle.classList.toggle('active');
             }
         });
     });
