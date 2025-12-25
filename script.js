@@ -150,7 +150,7 @@
                 setTimeout(renderAllCharts, 10);
             }
         });
-    };
+    );
 
 console.log("script.js yüklendi");
 
