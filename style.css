@@ -1246,3 +1246,23 @@ body.dark .panel-butonlar a {
         padding-left: 40px !important;
     }
 }
+
+.alt-menü a,
+.toggle-menu {
+    display: flex;
+    align-items: center;     /* İkon ile yazı dikey ortalansın */
+    gap: 10px;               /* İkon ile yazı arası boşluk */
+}
+
+.alt-menü a i,
+.toggle-menu i {
+    width: 18px;             /* İkon genişliği sabit */
+    text-align: center;
+    font-size: 1.1em;
+    color: var(--ana-mavi);  /* Vurgu mavisiyle ikonlar öne çıksın */
+}
+
+.sub-menu a i {
+    font-size: 1em;
+    color: var(--ana-mavi);
+}
