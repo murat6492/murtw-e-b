@@ -151,7 +151,32 @@
             }
         });
     });
-}); // DOMContentLoaded sonu
+console.log("script.js yüklendi");
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  document.querySelectorAll("[data-sekme-target]").forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+
+      const hedef = link.dataset.sekmeTarget;
+      console.log("TIK:", hedef);
+
+      document.querySelectorAll(".content-box").forEach(box => {
+        box.classList.add("gizli");
+      });
+
+      const hedefEl = document.getElementById(hedef);
+      if (hedefEl) {
+        hedefEl.classList.remove("gizli");
+      } else {
+        console.error("BULUNAMADI:", hedef);
+      }
+    });
+  });
+
+});
+ // DOMContentLoaded sonu
 
 /* ================================================= */
 /* 5. MODERN GRAFİKLER (Chart.js ile) */
