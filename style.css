@@ -1266,3 +1266,18 @@ body.dark .panel-butonlar a {
     font-size: 1em;
     color: var(--ana-mavi);
 }
+
+.toggle-menu {
+    justify-content: space-between; /* Yazı solda, ok sağda */
+}
+
+.toggle-ok {
+    transition: transform 0.3s;
+    font-size: 0.9em;
+}
+
+/* Açıkken ok yukarı dönsün */
+.sub-menu:not(.gizli) + .toggle-menu .toggle-ok,
+.toggle-menu.active .toggle-ok {
+    transform: rotate(180deg);
+}
