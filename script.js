@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sekmeIcerikleri.forEach(icerik => icerik.classList.add('gizli'));
         // 3. Hedef sekme başlığını ve içeriğini aktif et
         if (internalTabName) {
-            const targetBaslik = document.querySelector(.sekme-menü .sekme-baslik[data-sekme="${internalTabName}"]);
+            const targetBaslik = document.querySelector(.sekme-menü .sekme-baslik[data-sekme="${internalTabName}");
             const targetIcerik = document.getElementById(internalTabName + '-icerik');
            
             if (targetBaslik) targetBaslik.classList.add('aktif');
