@@ -428,22 +428,24 @@ fetch("https://raw.githubusercontent.com/murat6492/my-fin-data/gh-pages/tumhisse
     console.log("Bulunan hisse:", hisseVerisi);
 
     // 🎯 HTML elemanları
-    const kodEl = document.querySelector(".hisse-kodu");
-    const fiyatEl = document.querySelector(".fiyat");
-    const yuzdeEl = document.querySelector(".yuzde");
+   const kodEl = document.querySelector(".hisse-kodu");
+const fiyatEl = document.querySelector(".fiyat");
+const yuzdeEl = document.querySelector(".yuzde");
 
-    // 🧩 HTML'e yaz
-    kodEl.textContent = hisseVerisi.Hisse;
-    fiyatEl.textContent = hisseVerisi["Son Fiyat (TL)"];
-    yuzdeEl.textContent =
-      (hisseVerisi["Değişim (%)"] > 0 ? "+" : "") +
-      hisseVerisi["Değişim (%)"];
+if (!kodEl || !fiyatEl || !yuzdeEl) {
+  console.error("Hisse header elementleri bulunamadı");
+  return;
+}
 
-    yuzdeEl.classList.remove("artti", "dustu");
-    yuzdeEl.classList.add(
-      hisseVerisi["Değişim (%)"] >= 0 ? "artti" : "dustu"
-    );
-  })
-  .catch(err => console.error("JSON okuma hatası:", err));
+kodEl.textContent = hisseVerisi.Hisse;
+fiyatEl.textContent = hisseVerisi["Son Fiyat (TL)"];
+
+const degisim = Number(hisseVerisi["Değişim (%)"]);
+
+yuzdeEl.textContent = (degisim > 0 ? "+" : "") + degisim;
+
+yuzdeEl.classList.remove("artti", "dustu");
+yuzdeEl.classList.add(degisim >= 0 ? "artti" : "dustu");
+
 
 
