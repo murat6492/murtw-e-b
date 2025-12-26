@@ -1,3 +1,5 @@
+console.log("JS DOSYASI BASARIYLA YUKLENDI!");
+alert("JS Calisiyor!");
 document.addEventListener('DOMContentLoaded', () => {
     
     /* ================================================= */
