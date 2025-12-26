@@ -383,39 +383,27 @@ document.addEventListener('DOMContentLoaded', function() {
 const searchInput = document.querySelector('.arama-kutusu input');
 const searchButton = document.querySelector('.arama-kutusu button');
 
-// 2) Tıklanınca arama çalışsın
 searchButton.addEventListener('click', () => {
     const hisse = searchInput.value.trim().toUpperCase();
     if (!hisse) return;
 
-    console.log("Aranan hisse:", hisse);
+    const fileName = encodeURIComponent(`${hisse} (TRY)__bilanço.json`);
+    const url = `https://raw.githubusercontent.com/murat6492/my-fin-data/gh-pages/data/${fileName}`;
 
-    // Bilanço dosya adı formatı:
-    const fileName = `${hisse} (TRY)__bilanço.json`;
-    // GitHub JSON URL
-    const url = `https://raw.githubusercontent.com/murat6492/my-fin-data/gh-pages/${fileName}`;
+    console.log("JSON URL:", url);
 
-    console.log("Kontrol edilen URL:", url);
-
-    // 3) Veriyi çek
     fetch(url)
         .then(res => {
-            if (!res.ok) {
-                console.error("Dosya bulunamadı:", fileName);
-                alert("Bu hisse için veri bulunamadı!");
-                return null;
-            }
+            if (!res.ok) throw new Error("Dosya bulunamadı");
             return res.json();
         })
         .then(data => {
-            if (!data) return;
-
-            console.log("Veri başarıyla alındı:", data);
-
-            // Şimdilik sadece console’a yazıyoruz
-            // Sonraki adımda tablo ve grafiklere aktaracağız
+            console.log("JSON geldi:", data);
         })
         .catch(err => {
-            console.error("Fetch hatası:", err);
+            console.error("Fetch hatası:", err.message);
         });
 });
+
+
+
