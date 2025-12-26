@@ -411,31 +411,39 @@ searchButton.addEventListener('click', () => {
 fetch("https://raw.githubusercontent.com/murat6492/my-fin-data/gh-pages/tumhisse.json")
   .then(r => r.json())
   .then(data => {
-    console.log("Tüm hisse verileri alındı", data);
+    console.log("JSON yüklendi:", data);
 
-    const hisse = "A1CAP"; // şimdilik sabit
+    const arananHisse = "A1CAP"; // şimdilik sabit
 
-    const fiyatEl = document.querySelector(".fiyat");
-    const yuzdeEl = document.querySelector(".yuzde");
-    const kodEl = document.querySelector(".hisse-kodu");
+    // 🔍 Hisseyi array içinden bul
+    const hisseVerisi = data.find(
+      item => item.Hisse === arananHisse
+    );
 
-    if (!data[hisse]) {
-      console.warn("Hisse bulunamadı:", hisse);
+    if (!hisseVerisi) {
+      console.warn("Hisse bulunamadı:", arananHisse);
       return;
     }
 
-    kodEl.textContent = hisse;
-    fiyatEl.textContent = data[hisse].son_fiyat;
+    console.log("Bulunan hisse:", hisseVerisi);
 
+    // 🎯 HTML elemanları
+    const kodEl = document.querySelector(".hisse-kodu");
+    const fiyatEl = document.querySelector(".fiyat");
+    const yuzdeEl = document.querySelector(".yuzde");
+
+    // 🧩 HTML'e yaz
+    kodEl.textContent = hisseVerisi.Hisse;
+    fiyatEl.textContent = hisseVerisi["Son Fiyat (TL)"];
     yuzdeEl.textContent =
-      (data[hisse].degisim_yuzde > 0 ? "+" : "") + data[hisse].degisim_yuzde;
+      (hisseVerisi["Değişim (%)"] > 0 ? "+" : "") +
+      hisseVerisi["Değişim (%)"];
 
     yuzdeEl.classList.remove("artti", "dustu");
     yuzdeEl.classList.add(
-      data[hisse].degisim_yuzde >= 0 ? "artti" : "dustu"
+      hisseVerisi["Değişim (%)"] >= 0 ? "artti" : "dustu"
     );
   })
   .catch(err => console.error("JSON okuma hatası:", err));
-
 
 
