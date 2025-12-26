@@ -13,18 +13,14 @@
 
     <div class="sol-sutun">
         <div class="header-band">
-              <button class="tema-buton" id="temaDegistir" title="Tema Değiştir">☀️</button>
                <div class="kullanici-alani">
                <i class="fas fa-user-circle"></i>
         </div>
     </div>
         <div class="logo-alani">
-    <img src="images/logoson.png" alt="BİSTDATAS Logo" class="bistdatas-logo"> 
-     <!-- YENİ: Menü daralt/genişlet butonu -->
-    <button id="menuToggleBtn" class="menu-toggle-btn" title="Menüyü Daralt/Genişlet">
-        <i class="fas fa-chevron-left"></i>
-    </button>
-        </div>
+    <img src="images/logoson.png" alt="BİSTDATAS Logo" class="bistdatas-logo">
+    
+</div>
         
         <form class="arama-kutusu" onsubmit="return false;">
     <input id="hisseInput" type="text" placeholder="Ara..." required>
@@ -38,61 +34,27 @@
             <li><a href="#" data-sekme-target="izleme-listesi-icerik"><i class="fas fa-bookmark"></i> İzleme Listesi</a></li>
             <li><a href="#" data-sekme-target="portföy-icerik"><i class="fas fa-chart-pie"></i> Portföy</a></li>
         </ul>
-
-<div class="alt-menü-kapsayici">
-    <h3 class="menu-baslik">Analiz</h3>
-    <ul class="alt-menü">
-        <li>
-            <a href="#" class="menu-link" data-sekme-target="hisse-detay-icerik" data-sekme-internal="ozet">
-                <i class="fas fa-chart-pie"></i> Özet
-            </a>
-        </li>
-        <li>
-            <a href="#" class="menu-link" data-sekme-target="hisse-detay-icerik" data-sekme-internal="bistdata-analiz">
-                <i class="fa-solid fa-database"></i> BistData Analiz
-            </a>
-        </li>
-        <li>
-            <a href="#" class="menu-link" data-sekme-target="hisse-detay-icerik" data-sekme-internal="hisse-degerleme-icerik">
-                <i class="fas fa-calculator"></i> Hisse Değerleme
-            </a>
-        </li>
-        <li>
-
-            <span class="toggle-menu" data-target="mali-menu">
-    <i class="fas fa-file-invoice-dollar"></i> Veri
-    <i class="fas fa-chevron-down toggle-ok"></i>
-</span>
         
-            <ul id="mali-menu" class="sub-menu gizli">
-                <li>
-                    <a href="#" data-sekme-target="hisse-detay-icerik" data-sekme-internal="bilanco">
-                        <i class="fas fa-balance-scale"></i> Bilanço
-                    </a>
+        <div class="alt-menü-kapsayici">
+            <h3 class="menu-baslik">Analiz</h3>
+            <ul class="alt-menü">
+                <li><a href="#" class="menu-link" data-sekme-target="hisse-detay-icerik" data-sekme-internal="ozet">Özet</a></li>
+                <li><a href="#" class="menu-link" data-sekme-target="hisse-detay-icerik" data-sekme-internal="bistdata-analiz">BistData Analiz</a></li>
+                <li><a href="#" class="menu-link" data-sekme-target="hisse-detay-icerik" data-sekme-internal="hisse-degerleme-icerik">Hisse Değerleme</a></li>
+                <li><span class="toggle-menu" data-target="mali-menu">Finansal Veriler</span>
+                    <ul id="mali-menu" class="sub-menu gizli"> <li><a href="#" data-sekme-target="hisse-detay-icerik" data-sekme-internal="bilanco">Bilanço</a></li>
+                        <li><a href="#" data-sekme-target="hisse-detay-icerik" data-sekme-internal="gelir-tablosu">Gelir Tablosu</a></li>
+                        <li><a href="#" data-sekme-target="hisse-detay-icerik" data-sekme-internal="nakit-akis">Nakit Akış</a></li>
+                    </ul>
                 </li>
-                <li>
-                    <a href="#" data-sekme-target="hisse-detay-icerik" data-sekme-internal="gelir-tablosu">
-                        <i class="fas fa-chart-bar"></i> Gelir Tablosu
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-sekme-target="hisse-detay-icerik" data-sekme-internal="nakit-akis">
-                        <i class="fas fa-money-bill-wave"></i> Nakit Akış
-                    </a>
-                </li>
-            </ul>
-        </li>
-    </ul>
-</div>
-            
+                </ul>
+        </div>
+        
+        
         <div class="alt-menü-kapsayici">
             <h3 class="menu-baslik">Hisse Detay</h3>
             <ul class="alt-menü">
-                <li><a href="#" data-sekme-target="bildirimler-icerik">Bildirimler</a></li>
-                <li><a href="#" data-sekme-target="geri-alim-icerik">Geri Alım</a></li>
-                <li><a href="#" data-sekme-target="is-iliskisi-icerik">İş İlişkisi</a></li>
-                <li><a href="#" data-sekme-target="halka-arz-icerik">Halka Arz</a></li>
-                <li><a href="#" data-sekme-target="finansal-okur-icerik">Finansal Okur-</a></li>
+                <li><a href="#" data-sekme-target="finansal-okur-icerik">Finansal Okur-Yazar</a></li>
                 <div class="sidebar-login-box">
                      <button class="sidebar-login-btn">Giriş / Kayıt Ol</button>
 </div>
@@ -102,10 +64,6 @@
 
     <div class="ana-icerik-kapsayici">
         <div class="ana-icerik">
-
-            <div class="reklam-alani ust">reklam alanı</div>
-            
-
             <div id="anasayfa-icerik" class="content-box">
                 <div class="piyasa-verileri-band">
                     <div class="piyasa-kutu">
@@ -343,25 +301,18 @@
 
             </div>
 
-    
-    <div id="hisse-detay-icerik" class="content-box gizli">
+            <div id="hisse-detay-icerik" class="content-box gizli">
     
     <div class="hisse-baslik-alan">
         <div class="hisse-sol">
-
-            <h1 id="hisse-kodu" class="hisse-kodu">Asels</h1>
-            <span id="hisse-ad" class="hisse-ad">
-                ASELSAN Elektronik Sanayi Savunma
-            </span>
-
+            <h1 class="hisse-kodu">Asels</h1>
+            <span class="hisse-ad">ASELSAN Elektronik Sanayi Savunma</span>
             <div class="fiyat-bilgi">
-                <span id="hisse-fiyat" class="fiyat">207.25</span>
-                <span id="hisse-yuzde" class="yuzde artti">+3.55</span>
+                <span class="fiyat">207.25</span>
+                <span class="yuzde artti">+3.55</span>
             </div>
-
         </div>
-    </div>
-</div>
+
         <div class="tekli-panel-listesi">
             <div class="ozet-bilgi-panel">
                 <div class="ozet-bilgi-baslik">Ödenmiş Sermaye</div>
@@ -382,11 +333,7 @@
         <div class="sekme-baslik aktif" data-sekme="ozet">Özet</div>
         <div class="sekme-baslik" data-sekme="bistdata-analiz">BistData Analizi</div>
         <div class="sekme-baslik" data-sekme="finansal-veriler">Finansal Veriler</div>
-        <div class="sekme-baslik" data-sekme="bildirimler">Bildirimler</div>
-        <div class="sekme-baslik" data-sekme="geri-alim">Geri Alım</div>
-        <div class="sekme-baslik" data-sekme="is-iliskisi">İş İlişkisi</div>
         <div class="sekme-baslik" data-sekme="hisse-degerleme">Hisse Değerleme</div>
-        <div class="sekme-baslik" data-sekme="sirket-karnesi">Şirket Karnesi</div>
     </div>
     
     <div id="ozet-icerik" class="sekme-icerik">
@@ -402,7 +349,7 @@
                     <div class="oran-satir"><span class="oran-ad">PD/SATIŞLAR</span><span class="oran-deger">11</span></div>
                     <div class="oran-satir"><span class="oran-ad">PD/EFK</span><span class="oran-deger">11</span></div>
                     <div class="oran-satir"><span class="oran-ad">PD/FAVÖK</span><span class="oran-değer">11</span></div>
-                    <div class="oran-satir"><span class="oran-ad">P/O.NER.KAR</span><span class="oran-deger">11</span></div>
+                    <div class="oran-satir"><span class="oran-ad">PD/NET KAR</span><span class="oran-deger">11</span></div>
                 </div>
             </div>
             
@@ -947,58 +894,32 @@
         </div> 
     
 
-        <div class="panel-row-tek" style="margin-top: 20px;">
-    
-    <div class="grafik-panel">
-        <div class="panel-butonlar-ust">
-            <button class="info-btn" data-info-target="info-cari-oran" title="Detaylı Bilgi">ℹ️</button>
-            <a href="https://www.youtube.com/watch?v=CARIORAN_ID" target="_blank" class="youtube-btn" title="İnceleme Videosu">▶️</a>
-        </div>
-        <h3 class="panel-baslik">Cari Oran</h3>
-        <div id="info-cari-oran" class="bilgi-notu gizli">
-            <p><strong>Cari Oran:</strong> İşletmenin kısa vadeli borçlarını ödeme gücünü gösterir...</p>
-        </div>
-        <div class="grafik-yer-tutucu">
-            <div class="grafik-alani">
-                <canvas id="chart10-cari-oran" height="260"></canvas>
+ <div class="panel-row-tek" style="margin-top: 20px;">
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Cari Oran</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart10-cari-oran" height="260"></canvas>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    
-    <div class="grafik-panel">
-        <div class="panel-butonlar-ust">
-            <button class="info-btn" data-info-target="info-likidite-oran" title="Detaylı Bilgi">ℹ️</button>
-            <a href="https://www.youtube.com/watch?v=LIKIDITE_ID" target="_blank" class="youtube-btn" title="İnceleme Videosu">▶️</a>
-        </div>
-        <h3 class="panel-baslik">Likidite Oranı</h3>
-        <div id="info-likidite-oran" class="bilgi-notu gizli">
-            <p><strong>Likidite Oranı:</strong> Stoklar hariç, borç ödeme gücünü gösterir...</p>
-        </div>
-        <div class="grafik-yer-tutucu">
-            <div class="grafik-alani">
-                <canvas id="chart10-likidite" height="260"></canvas>
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Likidite Oranı</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart10-likidite-oran" height="260"></canvas>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    
-    <div class="grafik-panel">
-        <div class="panel-butonlar-ust">
-            <button class="info-btn" data-info-target="info-nakit-oran" title="Detaylı Bilgi">ℹ️</button>
-            <a href="https://www.youtube.com/watch?v=NAKITORAN_ID" target="_blank" class="youtube-btn" title="İnceleme Videosu">▶️</a>
-        </div>
-        <h3 class="panel-baslik">Nakit Oran</h3>
-        <div id="info-nakit-oran" class="bilgi-notu gizli">
-            <p><strong>Nakit Oran:</strong> İşletmenin sadece nakit ve nakit benzerleri ile borçlarını ödeme gücünü gösterir...</p>
-        </div>
-        <div class="grafik-yer-tutucu">
-            <div class="grafik-alani">
-                <canvas id="chart10-nakit" height="260"></canvas>
-            </div>
-        </div>
-    </div>
-    
-</div>
-
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Nakit Oranı</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart10-nakit-oran" height="260"></canvas>
+                    </div>
+                </div> 
+        </div>  
+ </div>          
         <div class="panel-row-tek">
             <div class="grafik-panel">
                 <h3 class="panel-baslik">Hazır Değerler Oranı</h3>
@@ -1023,12 +944,88 @@
                         <canvas id="chart10-mali-rantabilite" height="260"></canvas>
                     </div>
                 </div>
-        </div>
-    </div>
+            </div>
+        </div> 
+        <div class="panel-row-tek">
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Hazır Değerler Oranı</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart10-hazir-degerler" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Ekonomik Rantabilite Oranı</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart10-ekonomik-rantabilite" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Mali  Rantabilite Oranı</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart10-mali-rantabilite" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <div class="panel-row-tek">
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Hazır Değerler Oranı</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart10-hazir-degerler" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Ekonomik Rantabilite Oranı</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart10-ekonomik-rantabilite" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Mali  Rantabilite Oranı</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart10-mali-rantabilite" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <div class="panel-row-tek">
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Hazır Değerler Oranı</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart10-hazir-degerler" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Ekonomik Rantabilite Oranı</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart10-ekonomik-rantabilite" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grafik-panel">
+                <h3 class="panel-baslik">Mali  Rantabilite Oranı</h3>
+                <div class="grafik-yer-tutucu">
+                    <div class="grafik-alani">
+                        <canvas id="chart10-mali-rantabilite" height="260"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div> 
 
     <div id="finansal-veriler-icerik" class="sekme-icerik gizli">Finansal Veriler İçeriği</div>
-    <div id="bildirimler-icerik" class="sekme-icerik gizli">Bildirimler İçeriği</div>
-    
     <div id="hisseler-icerik" class="content-box gizli">Hisseler Sayfası</div>
     <div id="izleme-listesi-icerik" class="content-box gizli">İzleme Listesi Sayfası</div>
     <div id="bilanco-icerik" class="content-box gizli">Bilanço Sayfası</div>
@@ -1036,13 +1033,8 @@
     <div id="nakit-akis-icerik" class="content-box gizli">Nakit Akış Sayfası</div>
     <div id="oranlar-icerik" class="content-box gizli">Oranlar Sayfası</div>
     <div id="marjlar-icerik" class="content-box gizli">Marjlar Sayfası</div>
-    <div id="is-iliskisi-icerik" class="content-box gizli">İş İlişkisi Sayfası</div>
-    <div id="halka-arz-icerik" class="content-box gizli">Halka Arz Sayfası</div>
-    <div id="finansal-okur-icerik" class="content-box gizli">Finansal Okur-yazarlık Sayfası</div>
-    <div id="hakkimizda-icerik" class="content-box gizli">Hakkımızda Sayfası</div>
-    <div id="yasal-uyari-icerik" class="content-box gizli">Yasal Uyarı Sayfası</div>
-    <div id="geri-alim-icerik" class="content-box gizli">Geri Alım Sayfası</div>
-    <div id="bildirimler-icerik" class="content-box gizli">Bildirimler Sayfası</div>
+    <div id="karlilik-icerik" class="content-box gizli">Karlılık Sayfası
+
 
 </div>
     </div>
