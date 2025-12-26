@@ -405,5 +405,37 @@ searchButton.addEventListener('click', () => {
         });
 });
 
+// ===============================
+// TÜM HİSSELER JSON'DAN OKUMA
+// ===============================
+fetch("https://raw.githubusercontent.com/murat6492/my-fin-data/gh-pages/tumhisse.json")
+  .then(r => r.json())
+  .then(data => {
+    console.log("Tüm hisse verileri alındı", data);
+
+    const hisse = "A1CAP"; // şimdilik sabit
+
+    const fiyatEl = document.querySelector(".fiyat");
+    const yuzdeEl = document.querySelector(".yuzde");
+    const kodEl = document.querySelector(".hisse-kodu");
+
+    if (!data[hisse]) {
+      console.warn("Hisse bulunamadı:", hisse);
+      return;
+    }
+
+    kodEl.textContent = hisse;
+    fiyatEl.textContent = data[hisse].son_fiyat;
+
+    yuzdeEl.textContent =
+      (data[hisse].degisim_yuzde > 0 ? "+" : "") + data[hisse].degisim_yuzde;
+
+    yuzdeEl.classList.remove("artti", "dustu");
+    yuzdeEl.classList.add(
+      data[hisse].degisim_yuzde >= 0 ? "artti" : "dustu"
+    );
+  })
+  .catch(err => console.error("JSON okuma hatası:", err));
+
 
 
