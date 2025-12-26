@@ -569,83 +569,45 @@ body {
     .oranlar-panel:nth-child(3) { grid-column: span 2; } 
 }
 
-/* MOBİL DİKEY - Sol menü üstte akışta (gizli değil), içerik tam genişlik */
 @media (max-width: 900px) {
-    :root { 
-        --sol-genislik: 100%; /* Tam genişlik */
+    :root { --sol-genislik: 100%; --sag-genislik: 100%; }
+    /* DEĞİŞTİ: Mobil görünümde de üst boşluk kaldırıldı */
+    body { flex-direction: column; padding-top: 0; }
+    .header-band { position: relative; width: 100%; }
+    .sol-sutun, .sag-sutun { 
+        position: relative; 
+        width: 100%; 
+        height: auto; 
+        border-right: none; 
+        border-left: none; 
+        top: 0; 
     }
-
-    body {
-        flex-direction: column; /* Zaten var */
+    /* MOBİL DÜZELTME: Mobil cihazlarda padding 10px olarak ayarlandı. */
+    .ana-icerik-kapsayici { 
+        margin: 0; 
+        width: 100% !important; 
+        padding: 10px; /* Sadece 10px yatay ve dikey padding */
+        padding-left: 10px; 
+        padding-right: 10px; 
     }
-
-    .sol-sutun {
-        position: relative !important; /* Fixed değil, üstte akışta */
-        width: 100% !important;
-        height: auto !important;
-        border-right: none;
-        display: block !important; /* Gizli kalmasın, üstte görünsün */
-        padding-bottom: 20px;
-        border-bottom: 1px solid var(--hisse-border); /* Ayrım için */
-        overflow-y: visible;
-    }
-
-    .ana-icerik-kapsayici {
-        padding-left: 10px !important; /* Sol boşluk yok */
-        padding-right: 10px !important;
-        padding-top: 10px;
-        width: 100% !important;
-        margin: 0 !important;
-    }
-
-    /* Diğer mobil ayarlar (zaten var) */
+    
     .hisse-baslik-alan { flex-direction: column; }
-    .panel-row-tek { grid-template-columns: 1fr; }
-    .siralama-listeleri { grid-template-columns: 1fr; }
-    .piyasa-verileri-band { flex-wrap: wrap; }
-}
-
-/* MOBİL YATAY (LANDSCAPE) - MASAÜSTÜ GİBİ GÖRÜNÜM */
-@media (max-width: 1024px) and (orientation: landscape) {
-    :root { 
-        --sol-genislik: 220px; /* Biraz daha geniş, yatayda rahat olsun */
+    .hisse-sag { 
+        width: 100%; 
+        grid-template-columns: 1fr; /* Mobil'de tek sütun (4x1) */
+        margin-top: 5px; 
+        margin-left: 0; 
+        max-width: 100%;
+        
+        /* Mobil'de kesinlikle tek sütun: */
+        display: flex;
+        flex-direction: column;
     }
-
-    .sol-sutun {
-        position: fixed !important;
-        width: var(--sol-genislik) !important;
-        height: 100vh !important;
-        display: block !important;
-        overflow-y: auto;
-    }
-
-    .ana-icerik-kapsayici {
-        padding-left: calc(var(--sol-genislik) + 30px) !important; /* Sol menü + ekstra boşluk */
-        padding-right: 20px !important;
-        padding-top: 20px;
-    }
-
-    /* İçeriklerin yatayda PC gibi davranması */
-    .siralama-listeleri {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .piyasa-verileri-band {
-        flex-wrap: nowrap;
-    }
-
-    .panel-row-tek {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .hisse-baslik-alan {
-        flex-direction: row;
-    }
-
-    .hisse-sag {
-        margin-left: 15px;
-        margin-top: 0;
-    }
+    .fiyat { font-size: 2.5em; }
+    .panel-row { grid-template-columns: 1fr; gap: 10px; }
+    .oranlar-panel:nth-child(3) { grid-column: span 1; }
+    
+    .sol-sutun { display: none; }
 }
 /* ================================================= */
 /* YENİ ANASAYFA STİLLERİ (Ekran Görüntüsü 289) */
@@ -661,9 +623,8 @@ body {
 
 /* Üst Piyasa Kutuları Bandı */
 .piyasa-verileri-band {
-    width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     gap: 10px;
     margin-bottom: 25px;
 }
@@ -703,7 +664,6 @@ body {
 
 /* Orta Sıralama Listeleri */
 .siralama-listeleri {
-    width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
@@ -1094,192 +1054,4 @@ body {
 body.dark .panel-butonlar button,
 body.dark .panel-butonlar a {
     color: #a0a0c0;
-}
-
-/* ================================================
-   TELEFON YATAY MOD (LANDSCAPE) - PC GİBİ GÖRÜNÜM
-   ================================================ */
-
-/* Telefon yatay modda (genellikle 600-900px genişlik arası) */
-@media (min-width: 600px) and (max-width: 1024px) and (orientation: landscape) {
-
-    /* Sol menüyü göster ve sabitle */
-    .sol-sutun {
-        display: block !important;     /* Mobil'de gizliydi, yatayda göster */
-        position: fixed;
-        width: var(--sol-genislik);    /* 200px kalır */
-        height: 100vh;
-        overflow-y: auto;
-    }
-
-    /* Sağ içerik alanını sol boşluk bırakacak şekilde kaydır */
-    .ana-icerik-kapsayici {
-        padding-left: calc(var(--sol-genislik) + 20px) !important; /* Sol menü kadar boşluk */
-        padding-right: 20px;
-        padding-top: 10px;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    /* Reklam ve içeriklerin taşmasını engelle */
-    .ana-icerik {
-        max-width: none;
-    }
-
-    /* Sıralama listelerini yatayda 3 sütun tut (PC gibi) */
-    .siralama-listeleri {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    /* Piyasa kutularını yatayda yan yana tut */
-    .piyasa-verileri-band {
-        flex-wrap: nowrap;
-    }
-
-    .piyasa-kutu {
-        min-width: 100px;
-    }
-
-    /* Hisse başlık alanı yatayda yan yana */
-    .hisse-baslik-alan {
-        flex-direction: row;
-        align-items: flex-start;
-    }
-
-    .hisse-sag {
-        margin-left: 15px;
-        margin-top: 0;
-        max-width: 300px;
-    }
-
-    /* Panel row'ları 3 sütun */
-    .panel-row-tek {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 900px) {
-    #mobilMenuAc { display: block !important; }
-
-    .sol-sutun { display: none; } /* Gizli tut */
-
-    #mobilMenuAc.active + .sol-sutun { display: block; } /* Butona basınca göster */
-}
-
-/* MENÜ DARALT/GENİŞLET BUTONU */
-.menu-toggle-btn {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: var(--ana-mavi);
-    color: white;
-    border: none;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1em;
-    display: none; /* Mobilde görünür olacak */
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-}
-
-.menu-toggle-btn i {
-    transition: transform 0.3s;
-}
-
-/* Daraltılmış halde ok yönü ters */
-.sol-sutun.daraltilmis .menu-toggle-btn i {
-    transform: rotate(180deg);
-}
-
-/* MOBİL DİKEY VE YATAYDA BUTON GÖRÜNÜR */
-@media (max-width: 1024px) {
-    .menu-toggle-btn {
-        display: block !important;
-    }
-}
-
-/* MENÜ DARALTILMIŞ HAL */
-.sol-sutun.daraltilmis {
-    width: 35px !important; /* Sadece ikonlar sığsın */
-    transition: width 0.4s ease;
-}
-
-.sol-sutun.daraltilmis .logo-alani img {
-    width: 25px; /* Logo küçülsün */
-}
-
-.sol-sutun.daraltilmis .logo-alani h2,
-.sol-sutun.daraltilmis .arama-kutusu,
-.sol-sutun.daraltilmis .menu-baslik,
-.sol-sutun.daraltilmis .alt-menü a span,
-.sol-sutun.daraltilmis .sidebar-login-btn {
-    display: none !important;
-}
-
-.sol-sutun.daraltilmis .sol-menü a,
-.sol-sutun.daraltilmis .alt-menü a {
-    justify-content: center;
-    padding: 12px 0;
-    font-size: 0; /* Yazı gizle */
-}
-
-.sol-sutun.daraltilmis .sol-menü a i,
-.sol-sutun.daraltilmis .alt-menü a i {
-    margin: 0;
-    font-size: 1.2em;
-}
-
-/* İçerik boşluğu otomatik ayarlanır */
-.ana-icerik-kapsayici {
-    transition: padding-left 0.4s ease;
-}
-
-@media (max-width: 1024px) {
-    .sol-sutun.daraltilmis ~ .ana-icerik-kapsayici {
-        padding-left: 40px !important; /* Dar menü + boşluk */
-    }
-}
-
-@media (min-width: 1025px) {
-    .sol-sutun.daraltilmis ~ .ana-icerik-kapsayici {
-        padding-left: 40px !important;
-    }
-}
-
-.alt-menü a,
-.toggle-menu {
-    display: flex;
-    align-items: center;     /* İkon ile yazı dikey ortalansın */
-    gap: 10px;               /* İkon ile yazı arası boşluk */
-}
-
-.alt-menü a i,
-.toggle-menu i {
-    width: 18px;             /* İkon genişliği sabit */
-    text-align: center;
-    font-size: 1.1em;
-    color: var(--ana-mavi);  /* Vurgu mavisiyle ikonlar öne çıksın */
-}
-
-.sub-menu a i {
-    font-size: 1em;
-    color: var(--ana-mavi);
-}
-
-.toggle-menu {
-    justify-content: space-between; /* Yazı solda, ok sağda */
-}
-
-.toggle-ok {
-    transition: transform 0.3s;
-    font-size: 0.9em;
-}
-
-/* Açıkken ok yukarı dönsün */
-.sub-menu:not(.gizli) + .toggle-menu .toggle-ok,
-.toggle-menu.active .toggle-ok {
-    transform: rotate(180deg);
 }
