@@ -413,7 +413,7 @@ fetch("https://raw.githubusercontent.com/murat6492/my-fin-data/gh-pages/tumhisse
   .then(data => {
     console.log("JSON yüklendi:", data);
 
-    const arananHisse = "A1CAP"; // şimdilik sabit
+    const arananHisse = "ASELS"; // şimdilik sabit
 
     // 🔍 Hisseyi array içinden bul
     const hisseVerisi = data.find(
