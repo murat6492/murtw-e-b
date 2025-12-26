@@ -54,19 +54,19 @@ document.addEventListener("DOMContentLoaded", () => {
         const sekmeBasliklari = document.querySelectorAll('.sekme-menü .sekme-baslik');
         sekmeBasliklari.forEach(b => b.classList.remove('aktif'));
        
-        // 2. Tüm sekme içeriklerini gizle (hisse detay içindekiler)
-        const sekmeIcerikleri = document.querySelectorAll('#hisse-detay-icerik .sekme-icerik');
-        sekmeIcerikleri.forEach(icerik => icerik.classList.add('gizli'));
-        // 3. Hedef sekme başlığını ve içeriğini aktif et
-        if (internalTabName) {
-            const targetBaslik = document.querySelector(.sekme-menü .sekme-baslik[data-sekme="${internalTabName}");
-            const targetIcerik = document.getElementById(internalTabName + '-icerik');
-           
-            if (targetBaslik) targetBaslik.classList.add('aktif');
-            if (targetIcerik) targetIcerik.classList.remove('gizli');
-           
-        }
-    }
+       // 2. Tüm sekme içeriklerini gizle (hisse detay içindekiler)
+const sekmeIcerikleri = document.querySelectorAll('#hisse-detay-icerik .sekme-icerik');
+sekmeIcerikleri.forEach(icerik => icerik.classList.add('gizli'));
+
+// 3. Hedef sekme başlığını ve içeriğini aktif et
+if (internalTabName) {
+    // DÜZELTME BURADA: Backtick (`) eklendi
+    const targetBaslik = document.querySelector(`.sekme-menü .sekme-baslik[data-sekme="${internalTabName}"]`);
+    const targetIcerik = document.getElementById(internalTabName + '-icerik');
+    
+    if (targetBaslik) targetBaslik.classList.add('aktif');
+    if (targetIcerik) targetIcerik.classList.remove('gizli');
+}
     function changePage(targetId, internalTabName = 'ozet') { // Varsayılan sekme 'ozet'
        
         // 1. Tüm ana içerikleri gizle
