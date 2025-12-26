@@ -389,8 +389,7 @@ searchButton.addEventListener('click', () => {
     console.log("Aranan hisse:", hisse);
 
     // Bilanço dosya adı formatı:
-    const fileName = `${asels} (TRY)__bilanço.json`;
-    const fileName = `${asels} (TRY)__bilanço.json`;
+    const fileName = `${hisse} (TRY)__bilanço.json`;
     // GitHub JSON URL
     const url = `https://raw.githubusercontent.com/murat6492/my-fin-data/gh-pages/${fileName}`;
 
