@@ -446,4 +446,4 @@ yuzdeEl.textContent = (degisim > 0 ? "+" : "") + degisim;
 
 yuzdeEl.classList.remove("artti", "dustu");
 yuzdeEl.classList.add(degisim >= 0 ? "artti" : "dustu");
-        });
+        }
