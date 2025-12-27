@@ -408,42 +408,4 @@ searchButton.addEventListener('click', () => {
 // ===============================
 // TÜM HİSSELER JSON'DAN OKUMA
 // ===============================
-fetch("https://raw.githubusercontent.com/murat6492/my-fin-data/gh-pages/tumhisse.json")
-  .then(r => r.json())
-  .then(data => {
-    console.log("JSON yüklendi:", data);
 
-    const arananHisse = "ASELS"; // şimdilik sabit
-
-    // 🔍 Hisseyi array içinden bul
-    const hisseVerisi = data.find(
-      item => item.Hisse === arananHisse
-    );
-
-    if (!hisseVerisi) {
-      console.warn("Hisse bulunamadı:", arananHisse);
-      return;
-    }
-
-    console.log("Bulunan hisse:", hisseVerisi);
-
-    // 🎯 HTML elemanları
-   const kodEl = document.querySelector(".hisse-kodu");
-const fiyatEl = document.querySelector(".fiyat");
-const yuzdeEl = document.querySelector(".yuzde");
-
-if (!kodEl || !fiyatEl || !yuzdeEl) {
-  console.error("Hisse header elementleri bulunamadı");
-  return;
-}
-
-kodEl.textContent = hisseVerisi.Hisse;
-fiyatEl.textContent = hisseVerisi["Son Fiyat (TL)"];
-
-const degisim = Number(hisseVerisi["Değişim (%)"]);
-
-yuzdeEl.textContent = (degisim > 0 ? "+" : "") + degisim;
-
-yuzdeEl.classList.remove("artti", "dustu");
-yuzdeEl.classList.add(degisim >= 0 ? "artti" : "dustu");
-        }
