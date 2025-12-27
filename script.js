@@ -460,4 +460,53 @@ function loadPrice(hisse) {
       console.error("Fiyat yükleme hatası:", err.message);
     });
 }
+function loadPrice(hisse) {
+  fetch("https://murat6492.github.io/my-fin-data/tumhisse.json")
+    .then(r => r.json())
+    .then(list => {
+      const row = list.find(x => x.Hisse === hisse);
+      if (!row) {
+        alert("Hisse bulunamadı: " + hisse);
+        return;
+      }
+
+      document.getElementById("hisse-kodu").textContent = row.Hisse;
+      document.getElementById("hisse-fiyat").textContent = row["Son Fiyat (TL)"];
+      document.getElementById("hisse-yuzde").textContent =
+        row["Değişim (%)"] > 0
+          ? "+" + row["Değişim (%)"]
+          : row["Değişim (%)"];
+    })
+    .catch(err => {
+      console.error("Fiyat verisi alınamadı", err);
+    });
+}
+function loadPrice(hisse) {
+  fetch("https://murat6492.github.io/my-fin-data/tumhisse.json")
+    .then(r => r.json())
+    .then(list => {
+      const row = list.find(x => x.Hisse === hisse);
+      if (!row) {
+        alert("Hisse bulunamadı: " + hisse);
+        return;
+      }
+
+      document.getElementById("hisse-kodu").textContent = row.Hisse;
+      document.getElementById("hisse-fiyat").textContent = row["Son Fiyat (TL)"];
+      document.getElementById("hisse-yuzde").textContent =
+        row["Değişim (%)"] > 0
+          ? "+" + row["Değişim (%)"]
+          : row["Değişim (%)"];
+    })
+    .catch(err => {
+      console.error("Fiyat verisi alınamadı", err);
+    });
+}
+searchButton.addEventListener("click", () => {
+  const hisse = searchInput.value.trim().toUpperCase();
+  if (!hisse) return;
+
+  loadPrice(hisse);
+});
+
 
