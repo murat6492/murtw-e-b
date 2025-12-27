@@ -1,6 +1,39 @@
 console.log("JS DOSYASI BASARIYLA YUKLENDI!");
 alert("JS Calisiyor!");
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("Arama sistemi yüklendi");
+
+  const input = document.getElementById("hisseInput");
+  const button = document.getElementById("hisseAraBtn");
+
+  button.addEventListener("click", () => {
+    const hisse = input.value.trim().toUpperCase();
+    if (!hisse) return;
+
+    fetch("https://murat6492.github.io/my-fin-data/tumhisse.json")
+      .then(r => r.json())
+      .then(list => {
+        console.log("JSON yüklendi, satır sayısı:", list.length);
+
+        const row = list.find(x => x.Hisse === hisse);
+
+        if (!row) {
+          alert("Bu hisse bulunamadı: " + hisse);
+          return;
+        }
+
+        console.log("Bulunan satır:", row);
+
+        // DOM'A YAZ
+        document.getElementById("hisse-kodu").textContent = row.Hisse;
+        document.getElementById("hisse-fiyat").textContent = row["Son Fiyat (TL)"];
+        document.getElementById("hisse-yuzde").textContent = row["Değişim (%)"] + "%";
+      })
+      .catch(err => {
+        console.error("Hata:", err);
+      });
+  });
+});
     
     /* ================================================= */
     /* 1. TEMA DEĞİŞTİRME İŞLEVİ */
