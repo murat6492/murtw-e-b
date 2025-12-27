@@ -379,11 +379,21 @@ document.addEventListener('DOMContentLoaded', function() {
 //  ARAMA SİSTEMİ
 // =======================
 
-// 1) HTML içindeki arama kutusu
-const searchInput = document.querySelector('.arama-kutusu input');
-const searchButton = document.querySelector('.arama-kutusu button');
+// =======================
+//  ARAMA SİSTEMİ (GÜVENLİ)
+// =======================
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("Arama sistemi yüklendi");
 
-searchButton.addEventListener('click', () => {
+  const searchInput = document.querySelector('.arama-kutusu input');
+  const searchButton = document.querySelector('.arama-kutusu button');
+
+  if (!searchInput || !searchButton) {
+    console.error("Arama kutusu elemanları bulunamadı");
+    return;
+  }
+
+  searchButton.addEventListener('click', () => {
     const hisse = searchInput.value.trim().toUpperCase();
     if (!hisse) return;
 
@@ -393,19 +403,15 @@ searchButton.addEventListener('click', () => {
     console.log("JSON URL:", url);
 
     fetch(url)
-        .then(res => {
-            if (!res.ok) throw new Error("Dosya bulunamadı");
-            return res.json();
-        })
-        .then(data => {
-            console.log("JSON geldi:", data);
-        })
-        .catch(err => {
-            console.error("Fetch hatası:", err.message);
-        });
+      .then(res => {
+        if (!res.ok) throw new Error("Dosya bulunamadı");
+        return res.json();
+      })
+      .then(data => {
+        console.log("JSON geldi:", data.length);
+      })
+      .catch(err => {
+        console.error("Fetch hatası:", err.message);
+      });
+  });
 });
-
-// ===============================
-// TÜM HİSSELER JSON'DAN OKUMA
-// ===============================
-
