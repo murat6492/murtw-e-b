@@ -415,3 +415,51 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 });
+
+// =======================
+// FİYAT YÜKLEME (tumhisse.json)
+// =======================
+function loadPrice(hisse) {
+  const url =
+    "https://raw.githubusercontent.com/murat6492/my-fin-data/main/uploaded_excels/tumhisse.json";
+
+  console.log("Fiyat JSON çağrılıyor:", url);
+
+  fetch(url)
+    .then(res => {
+      if (!res.ok) throw new Error("tumhisse.json bulunamadı");
+      return res.json();
+    })
+    .then(list => {
+      console.log("Tüm hisseler yüklendi:", list.length);
+
+      const row = list.find(x => x.Hisse === hisse);
+
+      if (!row) {
+        console.warn("Fiyat bulunamadı:", hisse);
+        return;
+      }
+
+      console.log("FİYAT BULUNDU:", row);
+
+      // 👇 HTML'DEKİ ID'LER
+      const kodEl = document.getElementById("hisse-kodu");
+      const fiyatEl = document.getElementById("hisse-fiyat");
+      const yuzdeEl = document.getElementById("hisse-yuzde");
+
+      if (!kodEl || !fiyatEl || !yuzdeEl) {
+        console.error("Fiyat alanları DOM'da yok");
+        return;
+      }
+
+      kodEl.textContent = row.Hisse;
+      fiyatEl.textContent = row["Son Fiyat (TL)"];
+      yuzdeEl.textContent = row["Değişim (%)"];
+
+      console.log("FİYAT EKRANA YAZILDI ✔");
+    })
+    .catch(err => {
+      console.error("Fiyat yükleme hatası:", err.message);
+    });
+}
+
