@@ -408,46 +408,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// =======================
-//  ARAMA SİSTEMİ
-// =======================
-
-// =======================
-//  ARAMA SİSTEMİ (GÜVENLİ)
-// =======================
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("Arama sistemi yüklendi");
-
-  const searchInput = document.querySelector('.arama-kutusu input');
-  const searchButton = document.querySelector('.arama-kutusu button');
-
-  if (!searchInput || !searchButton) {
-    console.error("Arama kutusu elemanları bulunamadı");
-    return;
-  }
-
-  searchButton.addEventListener('click', () => {
-    const hisse = searchInput.value.trim().toUpperCase();
-    if (!hisse) return;
-
-    const fileName = encodeURIComponent(`${hisse} (TRY)__bilanço.json`);
-    const url = `https://raw.githubusercontent.com/murat6492/my-fin-data/gh-pages/data/${fileName}`;
-
-    console.log("JSON URL:", url);
-
-    fetch(url)
-      .then(res => {
-        if (!res.ok) throw new Error("Dosya bulunamadı");
-        return res.json();
-      })
-      .then(data => {
-        console.log("JSON geldi:", data.length);
-      })
-      .catch(err => {
-        console.error("Fetch hatası:", err.message);
-      });
-  });
-});
 
 // =======================
 // FİYAT YÜKLEME (tumhisse.json)
