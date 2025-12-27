@@ -420,9 +420,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // FİYAT YÜKLEME (tumhisse.json)
 // =======================
 function loadPrice(hisse) {
-  const url =
-    "https://raw.githubusercontent.com/murat6492/my-fin-data/main/uploaded_excels/tumhisse.json";
-
+  const url ="https://github.com/murat6492/my-fin-data/blob/main/uploaded_excels/tumhisse.json";
   console.log("Fiyat JSON çağrılıyor:", url);
 
   fetch(url)
